@@ -14,8 +14,8 @@ import akka.actor.Props;
 
 
 public class QuorumBasedTotalOrderBroadcast {
-	  final private static int N_REPLICAS = 10; // number of listening actors
-	  final private static int N_CLIENTS = 10;
+	  final private static int N_REPLICAS = 3; // number of listening actors
+	  final private static int N_CLIENTS = 3;
 	  
 	  public static void main(String[] args) {
 	    // Create the 'helloakka' actor system
@@ -26,6 +26,7 @@ public class QuorumBasedTotalOrderBroadcast {
 	    
 	    int id = 0;
 	    Random rand = new Random();
+	    
 	    // the first four peers will be participating in conversations
 	    for(int i=0; i<N_REPLICAS; i++) {
 	    replicas.add(system.actorOf(Replica.props(id++,2, false),    // actor class
@@ -33,26 +34,41 @@ public class QuorumBasedTotalOrderBroadcast {
 	            ));
 	    }
 	    
+	    //coordinator with  id -1 --->Actually in use
+	    
+	    replicas.add(system.actorOf(Replica.props(-1,2, false),    // actor class
+	            "coordinator"     // the new actor name (unique within the system)
+	            ));
+	    
+	    //TO DO coordinator with subclass
+	    final ActorRef coordinator = system.actorOf(
+	    											Coordinator.props(-1, 7),
+	    											"Coordinator");
+	    
+	   
+	    
 	    replicas = Collections.unmodifiableList(replicas);
 
 	    // send the group member list to everyone in the group 
+	    
+	    
 	    JoinGroupMsg join = new JoinGroupMsg(replicas);
 	    for (ActorRef peer: replicas) {
 	      peer.tell(join, null);
 	    }
 	    
 	    
-	    
+	    //clients choose a random replica and start send messages
 		final ActorRef client = system.actorOf(
-		          Client.props(1, replicas.get(2)),  // this one will start the topic "a"
+		          Client.props(1, replicas.get(rand.nextInt(4))), 
 		          "Client1"); 
 		
 		final ActorRef client2 = system.actorOf(
-		          Client.props(2, replicas.get(2)),  // this one will start the topic "a" rand.nextInt(replicas.size()))
+		          Client.props(2, replicas.get(rand.nextInt(4))),  
 		          "Client2"); 
 		
-		final ActorRef client3 = system.actorOf(
-		          Client.props(3, replicas.get(2)),  // this one will start the topic "a"
+		final ActorRef client3 = system.actorOf( 
+				Client.props(2, replicas.get(rand.nextInt(4))),
 		          "Client3"); 
 		
 		

@@ -31,7 +31,7 @@ public class Client extends AbstractActor{
 		Random rand = new Random();
 		int x = rand.nextInt(2);
 		
-		
+		//random read-write message
 		if (x==0) {
 			Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
 					Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
@@ -47,7 +47,7 @@ public class Client extends AbstractActor{
 			        Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
 			        replica,          
 			    
-			        new ReadRequest("Write Request" + getSelf().path().name()), // the message to send
+			        new ReadRequest("Read Request" + getSelf().path().name()), // the message to send
 			        getContext().system().dispatcher()
 			        ,                 // system dispatcher
 			        getSelf()                                           // source of the message (myself)

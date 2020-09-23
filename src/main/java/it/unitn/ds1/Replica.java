@@ -2,31 +2,35 @@ package it.unitn.ds1;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import it.unitn.ds1.Coordinator.CoordinatorWriteRequest;
 
 
 
 
 class Replica extends AbstractActor {
-	private int v;
-	private final int id; 
-	private List<ActorRef> replicas; // the list of replicas (the multicast group)
-	private boolean coordinator;
+	protected int v;
+	protected final int id; 
+	protected List<ActorRef> replicas; // the list of replicas 
 	
-	public Replica(int id, int v, boolean coordinator) {
+	//ACTOR REPLICA CONSTRUCTORS
+	
+	public Replica(int id, int v) {
 		    this.id = id;
 		    this.v = v;
-		    this.coordinator = coordinator;
 		  }
 	
 	static public Props props(int id, int v, boolean coord) {
-		    return Props.create(Replica.class, () -> new Replica(id, v, coord));
+		    return Props.create(Replica.class, () -> new Replica(id, v));
 		  }
 	
+	//MESSAGES CLASS
 	 public static class JoinGroupMsg implements Serializable {
 		    private final List<ActorRef> replicas; // list of group members
 		    public JoinGroupMsg(List<ActorRef> group) {
@@ -50,6 +54,9 @@ class Replica extends AbstractActor {
 		    }
 		}
 	  
+	
+	  
+	  //METHODS ON MESSAGES
 	  private void onReadRequest(ReadRequest req) {
 		    System.out.println("[ Replica " + this.id + "] received: "  +req.msg);
 		    System.out.println("[ Replica " + this.id + "] replied with value : "  +this.v);
@@ -57,26 +64,31 @@ class Replica extends AbstractActor {
 		  }
 	
 	  private void onWriteRequest(WriteRequest req) {
-		    if(isCoordinator()) {
-		    this.v=req.value;
-		    System.out.println("[ Replica " + this.id + "] write value : "  +this.v);
-		  }}
+		  if(isCoordinator()) {
+			  System.out.println("[ Coordinator ] received  : "  +req.msg);
+		    System.out.println("[ [ Coordinator ]  write value : "  +req.value);
+		    }else
+		    System.out.println("[ Replica " + this.id + "] received  : "  +req.msg);
+		   castToCoord();
+		  }
 	  
 	  private void onJoinGroupMsg(JoinGroupMsg msg) {
 		    this.replicas = msg.replicas;
-
-		    // create the vector clock
-		   
 		    System.out.printf("%s: joining a group of %d peers with ID %02d\n", 
 		        getSelf().path().name(), this.replicas.size(), this.id);
 		  }
 	  
-	private boolean isCoordinator() {
-		if (this.coordinator == true) {;
-		return true;}
-		return false;
-	}
-	
+	  //OTHER METHODS
+	 private boolean isCoordinator() {
+		 if (this.id==-1) {
+		 return true;}
+		 return false;
+	 }
+	 
+	 private void castToCoord() {
+		 System.out.println("Send write request to coord => TO DO!");
+	 }
+	 
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
@@ -86,4 +98,53 @@ class Replica extends AbstractActor {
 				.match(JoinGroupMsg.class, this::onJoinGroupMsg)
 				.build();
 	} 
+}
+
+
+//TO DO FOR THE QUORUM BASED 
+class Coordinator extends Replica {
+	
+	private final Set<ActorRef> yesVoters = new HashSet<>();
+	
+	
+	//COORDINATOR CONSTRUCTORS
+	public Coordinator(int id, int v) {
+		super(id, v);
+		
+	}
+	
+	static public Props props(int id, int v) {
+	    return Props.create(Coordinator.class, () -> new Coordinator(id, v));
+	  }
+	
+	public static class CoordinatorWriteRequest implements Serializable {
+	    public final String msg;
+	    public final int value;
+	    public CoordinatorWriteRequest(String msg, int value) {
+	      this.msg = msg;
+	      this.value = value;
+	    }
+
+	}
+	
+	private void OnCoordinatorWriteRequest(CoordinatorWriteRequest req) {
+	    System.out.println("[ Replica " + this.id + "] write value : "  +req.value);
+	    
+	  }
+  
+	
+	@Override
+	public Receive createReceive() {
+		// TODO Auto-generated method stub
+		return receiveBuilder()
+				.match(CoordinatorWriteRequest.class, this::OnCoordinatorWriteRequest)
+				.build();
+	} 
+	
+	//COORDINATOR MESSAGES
+
+	
+	
+
+	
 }
