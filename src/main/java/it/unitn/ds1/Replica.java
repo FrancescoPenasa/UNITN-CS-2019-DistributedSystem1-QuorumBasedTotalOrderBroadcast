@@ -26,7 +26,7 @@ class Replica extends AbstractActor {
 		    this.v = v;
 		  }
 	
-	static public Props props(int id, int v, boolean coord) {
+	static public Props props(int id, int v, boolean isCoordinator) {
 		    return Props.create(Replica.class, () -> new Replica(id, v));
 		  }
 	
