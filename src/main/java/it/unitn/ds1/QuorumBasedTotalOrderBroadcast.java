@@ -21,9 +21,9 @@ public class QuorumBasedTotalOrderBroadcast {
 		// Create replicas and put them in a list, replica 0 is the coordinator
 		List<ActorRef> replicas = new ArrayList<>();
 
-		replicas.add(system.actorOf(Replica.props(0,2, true),"replica"+"0"));
+		replicas.add(system.actorOf(Replica.props(0, 0),"replica"+"0"));
 		for(int id=1; id<N_REPLICAS; id++) {
-			replicas.add(system.actorOf(Replica.props(id,2, false),"replica"+id));
+			replicas.add(system.actorOf(Replica.props(id, 0),"replica"+id));
 	  	}
 
 		// Send the replicas members to all replicas
@@ -34,15 +34,11 @@ public class QuorumBasedTotalOrderBroadcast {
 		}
 
 
+		// Create clients and tell them the list of available replicas
 		List<ActorRef> clients = new ArrayList<>();
 		for(int id=0; id<N_CLIENTS; id++) {
 			clients.add(system.actorOf(Client.props(id, replicas),"client" + id));
 		}
-
-		// Send the replicas members to all clients
-		for (ActorRef peer: clients) {
-			peer.tell(new Client.StartMsg(), null);
-  		}
 
 		
 		  
