@@ -2,9 +2,7 @@ package it.unitn.ds1;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
@@ -12,9 +10,19 @@ import akka.actor.Props;
 
 
 /*
+For read operations, the
+replica will reply immediately with its local value. For write operations, instead, the request will be forwarded
+to the coordinator
+
 Replica can answer a read from a client, and propose and update to the coordinator
 Coordinator is determined by the value "coordinator", and it can receive a propose from a replica
  */
+
+// replica ask to coordinator
+// coordinator ask to replicas
+// replicas answer
+// coordinator confirsm
+// replica finally get the answer
 
 class Replica extends AbstractActor {
 	protected final int id;
@@ -111,70 +119,17 @@ class Replica extends AbstractActor {
 	 
 	@Override
 	public Receive createReceive() {
-		// TODO Auto-generated method stub
 		return receiveBuilder()
+				// both
+				.match(JoinGroupMsg.class, this::onJoinGroupMsg)
 				.match(ReadRequest.class, this::onReadRequest)
 				.match(WriteRequest.class, this::onWriteRequest)
-				.match(JoinGroupMsg.class, this::onJoinGroupMsg)
+
+				// only replicas
 				.match(UpdateToCoordinatorMsg.class, this::onUpdateToCoordinatorMsg)
+
+				// only coordinator
+
 				.build();
 	} 
 }
-
-
-
-
-
-
-
-
-/* PER ORA NON LA USIAMO QUESTA
-
-//TO DO FOR THE QUORUM BASED 
-class Coordinator extends Replica {
-	
-	private final Set<ActorRef> yesVoters = new HashSet<>();
-	
-	
-	//COORDINATOR CONSTRUCTORS
-	public Coordinator(int id, int v) {
-		super(id, v);
-		
-	}
-	
-	static public Props props(int id, int v) {
-	    return Props.create(Coordinator.class, () -> new Coordinator(id, v));
-	  }
-	
-	public static class CoordinatorWriteRequest implements Serializable {
-	    public final String msg;
-	    public final int value;
-	    public CoordinatorWriteRequest(String msg, int value) {
-	      this.msg = msg;
-	      this.value = value;
-	    }
-
-	}
-	
-	private void OnCoordinatorWriteRequest(CoordinatorWriteRequest req) {
-	    System.out.println("[ Replica " + this.id + "] write value : "  +req.value);
-	    
-	  }
-  
-	
-	@Override
-	public Receive createReceive() {
-		// TODO Auto-generated method stub
-		return receiveBuilder()
-				.match(CoordinatorWriteRequest.class, this::OnCoordinatorWriteRequest)
-				.build();
-	} 
-	
-	//COORDINATOR MESSAGES
-
-	
-	
-
-	
-}
-*/

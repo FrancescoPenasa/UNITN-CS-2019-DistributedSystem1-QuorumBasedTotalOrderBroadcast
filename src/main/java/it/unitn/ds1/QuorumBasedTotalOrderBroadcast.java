@@ -11,19 +11,21 @@ import akka.actor.ActorSystem;
 
 
 public class QuorumBasedTotalOrderBroadcast {
-	  final private static int N_REPLICAS = 5; // number of listening actors
+	// === CONSTANTS === //
+	  final private static int N_REPLICAS = 5;
 	  final private static int N_CLIENTS = 3;
-	  
+
+
 	  public static void main(String[] args) {
-		// Create the actor system
+
+	  	// Create the actor system
 		final ActorSystem system = ActorSystem.create("quorum_based_system");
 
 		// Create replicas and put them in a list, replica 0 is the coordinator
 		List<ActorRef> replicas = new ArrayList<>();
-
-		replicas.add(system.actorOf(Replica.props(0, 0),"replica"+"0"));
-		for(int id=1; id<N_REPLICAS; id++) {
-			replicas.add(system.actorOf(Replica.props(id, 0),"replica"+id));
+		int coordinatorID = 0;
+		for(int id=0; id<N_REPLICAS; id++) {
+			replicas.add(system.actorOf(Replica.props(id, coordinatorID),"replica"+id));
 	  	}
 
 		// Send the replicas members to all replicas
@@ -33,11 +35,9 @@ public class QuorumBasedTotalOrderBroadcast {
 		  peer.tell(join, null);
 		}
 
-
 		// Create clients and tell them the list of available replicas
-		List<ActorRef> clients = new ArrayList<>();
 		for(int id=0; id<N_CLIENTS; id++) {
-			clients.add(system.actorOf(Client.props(id, replicas),"client" + id));
+			system.actorOf(Client.props(id, replicas),"client" + id);
 		}
 
 		
@@ -47,7 +47,7 @@ public class QuorumBasedTotalOrderBroadcast {
 	      int input = System.in.read();
 	    } 
 	    catch (IOException ioe) {
-			System.err.println("error");
+			System.err.println("IOException error");
 		}
 	    finally {
 	      system.terminate();

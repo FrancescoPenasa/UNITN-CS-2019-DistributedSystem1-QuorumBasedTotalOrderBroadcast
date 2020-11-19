@@ -14,70 +14,74 @@ import it.unitn.ds1.Replica.ReadRequest;
 import it.unitn.ds1.Replica.WriteRequest;
 import scala.concurrent.duration.Duration;
 
+/*
+Client requests. The client can issue read and write requests to any replica. Both types of request contain
+the ActorRef of the client. The write request also contains the new proposed value v*.
+ */
 public class Client extends AbstractActor{
+	// === variables === //
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
 
-	// A message requesting the peer to start a discussion on his topic
-	public static class StartMsg implements Serializable {}
-
-	private void onStartMsg(StartMsg msg) {
-		Random rand = new Random();
-		boolean write = rand.nextBoolean();
-
-		int replica_index = rand.nextInt(replicas.size()); // todo change bound value?
-		if (write){ // update request
-			Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-					Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
-					Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
-					replicas.get(replica_index),
-					new WriteRequest("Write Request" + getSelf().path().name(), 8), // the message to send
-					getContext().system().dispatcher(),                 // system dispatcher
-					getSelf() );
-		}
-		else { // read request
-
-			Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-					Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
-					Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
-					replicas.get(replica_index),
-					new ReadRequest("Read Request" + getSelf().path().name()), // the message to send
-					getContext().system().dispatcher(),                 // system dispatcher
-					getSelf() );
-		}
-	}
-
-
-	// To send the replicas list to the client
-	public static class JoinGroupMsg implements Serializable {
-
-		private final List<ActorRef> group; // list of group members
-		public JoinGroupMsg(List<ActorRef> group) {
-			this.group = Collections.unmodifiableList(group);
-		}
-	}
-
-	private void onJoinGroupMsg(JoinGroupMsg msg) {
-		System.out.println("onJoinGroupMsh");
-		this.replicas = msg.group;
-		System.out.printf("%s: joining a group of %d peers with ID %02d\n",
-				getSelf().path().name(), this.replicas.size(), this.id);
-	}
-
-
-	static public Props props(int id, List<ActorRef> replicas) {
-		return Props.create(Client.class, () -> new Client(id, replicas));
-	}
-	//build client actor
+	// === build client actor === //
 	public Client(int id, List<ActorRef> replicas) {
 		this.id = id;
 		this.replicas = replicas;
+	}
+	static public Props props(int id, List<ActorRef> replicas) {
+		return Props.create(Client.class, () -> new Client(id, replicas));
+	}
+	// ========================== //
+
+
+	/*
+	get a random id of a replica
+	 */
+	private int getRandomID(){
+		Random rand = new Random();
+		int ID = rand.nextInt(replicas.size());
+		return ID;
+	}
+
+	/*
+	If true it means that the action is write
+	If false the action is read
+	 */
+	private boolean getRandomAction(){
+		Random rand = new Random();
+		boolean write = rand.nextBoolean();
+		return write;
+	}
+
+	private void sendWriteReq(int ID){
+		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
+				Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
+				Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
+				replicas.get(ID),								// dst
+				new WriteRequest("Write Request" + getSelf().path().name(), 8), // the message to send // TODO CHANGE MESSAGE
+				getContext().system().dispatcher(),                 // system dispatcher
+				getSelf() );
+	}
+	private void sendReadReq(int ID){
+		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
+				Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
+				Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
+				replicas.get(ID),								// dst
+				new ReadRequest("Read Request" + getSelf().path().name()), // the message to send
+				getContext().system().dispatcher(),                 // system dispatcher
+				getSelf() );
 	}
 
 	//client-request
 	@Override
 	  public void preStart() {
-
+		System.out.println("onJoinGroupMsh");
+		if (getRandomAction()){ // update request
+			sendWriteReq(getRandomID());
+		}
+		else { // read request
+			sendReadReq(getRandomID());
+		}
 
 	  }
 	  
@@ -85,8 +89,6 @@ public class Client extends AbstractActor{
 	@Override
 	public Receive createReceive() {
 		return receiveBuilder()
-				.match(JoinGroupMsg.class,    this::onJoinGroupMsg)
-				.match(StartMsg.class,    this::onStartMsg)
 				.build();
 	}
 
