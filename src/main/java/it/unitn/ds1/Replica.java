@@ -75,7 +75,7 @@ class Replica extends AbstractActor {
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(1, TimeUnit.SECONDS),
 				getSender(),
-				v,
+				new Client.ReadResponse(v),
 				getContext().system().dispatcher(),
 				getSelf()
 		);

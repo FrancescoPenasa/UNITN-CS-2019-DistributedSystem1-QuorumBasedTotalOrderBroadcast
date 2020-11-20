@@ -59,6 +59,8 @@ public class Client extends AbstractActor{
 	}
 
 
+
+
 	private Serializable sendWriteReq(int ID, int v){
 		WriteRequest wr = new WriteRequest(v);
 		getContext().system().scheduler().scheduleOnce(
@@ -84,6 +86,19 @@ public class Client extends AbstractActor{
 
 
 	/*
+
+	 */
+	public static class ReadResponse implements Serializable{
+		private final int v;
+		public ReadResponse(int v){
+			this.v = v;
+		}
+	}
+	private void onReadResponse(ReadResponse rr){
+		System.out.println("Client" + this.id + " received v = " + rr.v + " from " + getSender());
+	}
+
+	/*
 	WakeUp decide to which replica and which type of msg to send.
 	 */
 	public class WakeUpMsg implements Serializable{
@@ -98,7 +113,7 @@ public class Client extends AbstractActor{
 		if (getRandomAction()){ // update request
 			int v = getRandomValue();
 			req = sendWriteReq(ID, v);
-			System.out.println("sent update request to:" + ID + " from" + getSelf() + " with value " + v);
+			System.out.println("sent update request to replica" + ID + " from" + getSelf() + " with value " + v);
 		}
 		else { // read request
 			req = sendReadReq(ID);
@@ -127,6 +142,7 @@ public class Client extends AbstractActor{
 	public Receive createReceive() {
 		return receiveBuilder()
 				.match(WakeUpMsg.class, this::onWakeUpMsg)
+				.match(ReadResponse.class, this::onReadResponse)
 				.build();
 	}
 
