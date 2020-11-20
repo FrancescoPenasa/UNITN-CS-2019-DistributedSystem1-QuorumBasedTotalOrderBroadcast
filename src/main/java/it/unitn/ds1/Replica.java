@@ -1,12 +1,14 @@
 package it.unitn.ds1;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
-
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import scala.concurrent.duration.Duration;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /*
@@ -25,70 +27,89 @@ Coordinator is determined by the value "coordinator", and it can receive a propo
 // replica finally get the answer
 
 class Replica extends AbstractActor {
-	protected final int id;
-	protected final int value = 0;
-	protected final int coordinator;
+	protected final int id; // replica ID
+	protected final int v = 0; // internal value
+	protected final int coordinator; // coordinator ID
 	protected List<ActorRef> replicas; // the list of replicas
 
-	// Constructor
+	// === Constructor === //
 	public Replica(int id, int coordinator) {
-		    this.id = id;
-		    this.coordinator = coordinator;
-		  }
+		this.id = id;
+		this.coordinator = coordinator;
+	}
 	static public Props props(int id, int coordinator) {
-		    return Props.create(Replica.class, () -> new Replica(id, coordinator));
-		  }
-	
-	// Messages handlers
-	 public static class JoinGroupMsg implements Serializable {
-		    private final List<ActorRef> replicas; // list of group members
-		    public JoinGroupMsg(List<ActorRef> group) {
-		      this.replicas = Collections.unmodifiableList(group);
-		    }
-		  }
+		return Props.create(Replica.class, () -> new Replica(id, coordinator));
+	}
+	// ==================== //
 
-/* === READ === */
+	// === Messages handlers === //
+	// --- Join group --- //
+	/*
+	JoinGroupMsg and onJoinGroupMsg manage to send the replicas members to all replicas.
+	 */
+	public static class JoinGroupMsg implements Serializable {
+		private final List<ActorRef> replicas; // list of group members
+		public JoinGroupMsg(List<ActorRef> group) {
+			this.replicas = Collections.unmodifiableList(group);
+		}
+	}
+	private void onJoinGroupMsg(JoinGroupMsg msg) {
+		this.replicas = msg.replicas;
+		System.out.printf("%s: joining a group of %d peers with ID %02d\n",
+				getSelf().path().name(), this.replicas.size(), this.id);
+	}
+	// ------------------ //
+
+
+
+	// --- ReadRequest --- //
+	/*
+	ReadRequest and onReadRequest manage the read request from the client and send back the value.
+	 */
 	public static class ReadRequest implements Serializable {
-		public final String msg;
-		public ReadRequest(String msg) {
-			this.msg = msg;
+		public ReadRequest() {
 		}
 	}
-
-	// Message methods
 	private void onReadRequest(ReadRequest req) {
-		System.out.println("[ Replica " + this.id + "] received: "  +req.msg);
-		System.out.println("[ Replica " + this.id + "] replied with value : "  +this.value);
+		// todo insert crash check
+		getContext().system().scheduler().scheduleOnce(
+				Duration.create(1, TimeUnit.SECONDS),
+				getSender(),
+				v,
+				getContext().system().dispatcher(),
+				getSelf()
+		);
+		System.out.println("[ Replica " + this.id + "] received: "  + req);
+		System.out.println("[ Replica " + this.id + "] replied with value : "  + this.v);
+	}
+	// ------------------- //
+
+
+	/* === WRITE === */
+	public static class WriteRequest implements Serializable {
+		public final int value;
+		public WriteRequest(int value) {
+			// todo ask coordinator
+			this.value = value;
+		}
 
 	}
 
-/* === WRITE === */
-	public static class WriteRequest implements Serializable {
-		  public final String msg;
-		  public final int value;
-		  public WriteRequest(String msg, int value) {
-		    	// todo ask coordinator
-		      this.msg = msg;
-		      this.value = value;
-		    }
-
+	private void onWriteRequest(WriteRequest req) {
+		if (isCoordinator()) {
+			System.out.println("[ Coordinator ] received  : " + req);
+			System.out.println("[ [ Coordinator ]  write value : " + req.value);
+			// todo add the 2pc part for the coordinator update
+		} else {
+			System.out.println("[ Replica " + this.id + "] received  : " + req);
+			askUpdateToCoordinator(req.value);
 		}
+	}
 
-	  private void onWriteRequest(WriteRequest req) {
-		  if (isCoordinator()) {
-			  System.out.println("[ Coordinator ] received  : " + req.msg);
-			  System.out.println("[ [ Coordinator ]  write value : " + req.value);
-			  // todo add the 2pc part for the coordinator update
-		  } else {
-			  System.out.println("[ Replica " + this.id + "] received  : " + req.msg);
-			  askUpdateToCoordinator(req.value);
-		  }
-	  }
-
-	  private void askUpdateToCoordinator (int value){
+	private void askUpdateToCoordinator (int value){
 		UpdateToCoordinatorMsg update = new UpdateToCoordinatorMsg(value);
 		replicas.get(coordinator).tell(update, self());
-	  }
+	}
 
 
 	public static class UpdateToCoordinatorMsg implements Serializable {
@@ -105,18 +126,14 @@ class Replica extends AbstractActor {
 	}
 
 
-	  private void onJoinGroupMsg(JoinGroupMsg msg) {
-		    this.replicas = msg.replicas;
-		    System.out.printf("%s: joining a group of %d peers with ID %02d\n", 
-		        getSelf().path().name(), this.replicas.size(), this.id);
-		  }
-	  
-	  // Getter
-	 private boolean isCoordinator() {
-		 return this.coordinator == this.id;
-	 }
 
-	 
+
+	// Getter
+	private boolean isCoordinator() {
+		return this.coordinator == this.id;
+	}
+
+
 	@Override
 	public Receive createReceive() {
 		return receiveBuilder()
@@ -131,5 +148,5 @@ class Replica extends AbstractActor {
 				// only coordinator
 
 				.build();
-	} 
+	}
 }

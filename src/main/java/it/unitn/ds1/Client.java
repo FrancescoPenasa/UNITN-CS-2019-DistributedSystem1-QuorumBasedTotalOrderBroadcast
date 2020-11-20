@@ -1,7 +1,6 @@
 package it.unitn.ds1;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +42,12 @@ public class Client extends AbstractActor{
 		return ID;
 	}
 
+	private int getRandomValue(){
+		Random rand = new Random();
+		int v = rand.nextInt(50);
+		return v;
+	}
+
 	/*
 	If true it means that the action is write
 	If false the action is read
@@ -53,42 +58,75 @@ public class Client extends AbstractActor{
 		return write;
 	}
 
-	private void sendWriteReq(int ID){
-		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-				Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
-				Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
-				replicas.get(ID),								// dst
-				new WriteRequest("Write Request" + getSelf().path().name(), 8), // the message to send // TODO CHANGE MESSAGE
-				getContext().system().dispatcher(),                 // system dispatcher
-				getSelf() );
+
+	private Serializable sendWriteReq(int ID, int v){
+		WriteRequest wr = new WriteRequest(v);
+		getContext().system().scheduler().scheduleOnce(
+				Duration.create(3, TimeUnit.SECONDS),
+				replicas.get(ID),
+				wr,
+				getContext().system().dispatcher(),
+				getSelf()
+		);
+		return wr;
 	}
-	private void sendReadReq(int ID){
-		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-				Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
-				Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
-				replicas.get(ID),								// dst
-				new ReadRequest("Read Request" + getSelf().path().name()), // the message to send
-				getContext().system().dispatcher(),                 // system dispatcher
-				getSelf() );
+	private Serializable sendReadReq(int ID){
+		ReadRequest rr = new ReadRequest();
+		getContext().system().scheduler().scheduleOnce(
+				Duration.create(3, TimeUnit.SECONDS),
+				replicas.get(ID),
+				rr,
+				getContext().system().dispatcher(),
+				getSelf()
+		);
+		return rr;
 	}
 
-	//client-request
-	@Override
-	  public void preStart() {
-		System.out.println("onJoinGroupMsh");
+
+	/*
+	WakeUp decide to which replica and which type of msg to send.
+	 */
+	public class WakeUpMsg implements Serializable{
+		private final String msg;
+		public WakeUpMsg(String msg) {
+			this.msg = msg;
+		}
+	}
+	private	void onWakeUpMsg(WakeUpMsg msg){
+		int ID = getRandomID();
+		Serializable req = null;
 		if (getRandomAction()){ // update request
-			sendWriteReq(getRandomID());
+			int v = getRandomValue();
+			req = sendWriteReq(ID, v);
+			System.out.println("sent update request to:" + ID + " from" + getSelf() + " with value " + v);
 		}
 		else { // read request
-			sendReadReq(getRandomID());
+			req = sendReadReq(ID);
+			System.out.println("sent read request to:" + ID + " from" + getSelf());
 		}
+		System.out.println(req);
+	}
 
-	  }
-	  
+	/*
+	init the msg exchange, periodically call WakeUpMsg
+	 */
+	@Override
+	  public void preStart() {
+		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
+			Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
+			Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
+			getSelf(),								// dst
+			new WakeUpMsg("WakeUp" + getSelf().path().name()), // the message to send
+			getContext().system().dispatcher(),                 // system dispatcher
+			getSelf() );
+	}
+
+
 
 	@Override
 	public Receive createReceive() {
 		return receiveBuilder()
+				.match(WakeUpMsg.class, this::onWakeUpMsg)
 				.build();
 	}
 
