@@ -3,6 +3,24 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="20985a6c-eb57-4123-975e-55a81d917d9c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,12 +92,25 @@
       <workItem from="1602323141086" duration="1230000" />
       <workItem from="1602324386889" duration="843000" />
       <workItem from="1605810277412" duration="6015000" />
-      <workItem from="1605871128086" duration="6424000" />
+      <workItem from="1605871128086" duration="6617000" />
+      <workItem from="1605949885616" duration="1290000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="786" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605810873906">
@@ -90,22 +121,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1605872528360" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1605877383235">
+    <state width="1877" height="242" key="GridCell.Tab.0.bottom" timestamp="1605877749870">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605877383235" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1605877383235">
+    <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605877749870" />
+    <state width="1877" height="242" key="GridCell.Tab.0.center" timestamp="1605877749870">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605877383235" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1605877383235">
+    <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605877749870" />
+    <state width="1877" height="242" key="GridCell.Tab.0.left" timestamp="1605877749870">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605877383235" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1605877383235">
+    <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605877749870" />
+    <state width="1877" height="242" key="GridCell.Tab.0.right" timestamp="1605877749870">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605877383235" />
+    <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605877749870" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1601976257828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -21,6 +21,7 @@ public class Client extends AbstractActor{
 	// === variables === //
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
+	// ================= //
 
 	// === build client actor === //
 	public Client(int id, List<ActorRef> replicas) {
@@ -86,7 +87,7 @@ public class Client extends AbstractActor{
 
 
 	/*
-
+		Read the value sent from the replica after a read request
 	 */
 	public static class ReadResponse implements Serializable{
 		private final int v;

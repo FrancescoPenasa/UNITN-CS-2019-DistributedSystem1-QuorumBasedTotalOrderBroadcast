@@ -8,7 +8,7 @@ import it.unitn.ds1.Replica.JoinGroupMsg;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 
-
+// todo SISTEMARE UPDATE REQUEST CON LE CARATTERISTICHE 2PC.
 
 public class QuorumBasedTotalOrderBroadcast {
 	// === CONSTANTS === //

@@ -32,6 +32,11 @@ class Replica extends AbstractActor {
 	protected final int coordinator; // coordinator ID
 	protected List<ActorRef> replicas; // the list of replicas
 
+	// 2pc
+	public enum Vote {NO, YES}
+	public enum Decision {ABORT, COMMIT}
+
+
 	// === Constructor === //
 	public Replica(int id, int coordinator) {
 		this.id = id;
@@ -85,11 +90,16 @@ class Replica extends AbstractActor {
 	// ------------------- //
 
 
-	/* === WRITE === */
+
+	// === WriteRequest === //
+	/*
+	WriteRequest manage update request from the client,
+	if the receiving replica is the coordinator update all the other replicas
+	if the receiving replica is not the coordinator send the update req to the coordinator
+	 */
 	public static class WriteRequest implements Serializable {
 		public final int value;
 		public WriteRequest(int value) {
-			// todo ask coordinator
 			this.value = value;
 		}
 
@@ -99,31 +109,16 @@ class Replica extends AbstractActor {
 		if (isCoordinator()) {
 			System.out.println("[ Coordinator ] received  : " + req);
 			System.out.println("[ [ Coordinator ]  write value : " + req.value);
+			// update with this values all the replicas
 			// todo add the 2pc part for the coordinator update
 		} else {
 			System.out.println("[ Replica " + this.id + "] received  : " + req);
-			askUpdateToCoordinator(req.value);
+			WriteRequest update = new WriteRequest(req.value);
+			replicas.get(coordinator).tell(update, self());
 		}
 	}
+	// ============= //
 
-	private void askUpdateToCoordinator (int value){
-		UpdateToCoordinatorMsg update = new UpdateToCoordinatorMsg(value);
-		replicas.get(coordinator).tell(update, self());
-	}
-
-
-	public static class UpdateToCoordinatorMsg implements Serializable {
-		private final int new_value; // list of group members
-		public UpdateToCoordinatorMsg(int new_value) {
-			this.new_value = new_value;
-		}
-
-	}
-	private void onUpdateToCoordinatorMsg(UpdateToCoordinatorMsg new_value) {
-		// todo ask at least three replicas for the update
-		System.out.printf("%s: joining a group of %d peers with ID %02d\n",
-				getSelf().path().name(), this.replicas.size(), this.id);
-	}
 
 
 
@@ -143,7 +138,6 @@ class Replica extends AbstractActor {
 				.match(WriteRequest.class, this::onWriteRequest)
 
 				// only replicas
-				.match(UpdateToCoordinatorMsg.class, this::onUpdateToCoordinatorMsg)
 
 				// only coordinator
 
