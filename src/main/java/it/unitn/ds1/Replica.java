@@ -125,10 +125,93 @@ class Replica extends AbstractActor {
 			replicas.get(coordinator).tell(update, self());
 		}
 	}
-	// ============= //
+	// =============== //
+
+
+	// ============================================================================================================== //
+	// ======================================== 2 phase commit ====================================================== //
+	// ============================================================================================================== //
+// todo add quorum
+	// === VoteRequest === //
+	/*
+	All non-coordinator replicas will receive a VoteRequest and will answer with a VoteReponse
+	 */
+	public static class VoteRequest implements Serializable {
+		public VoteRequest() {
+		}
+	}
+	private void onVoteRequest(VoteRequest req) {
+		System.out.println("[ Replica " + this.id + "] received VoteRequest");
+		// this.coordinator = getSender().getId();
+
+		replicas.get(this.coordinator).tell(new VoteResponse(Vote.YES), getSelf());
+		setTimeout(DECISION_TIMEOUT);
+	}
+	// ==================== //
+
+	// === VoteResponse === //
+	/*
+	The coordinator receive the replicas votes and decide wheter to push COMMIT or ABORT
+	 */
+	public static class VoteResponse implements Serializable {
+		public final Vote vote;
+		public VoteResponse(Vote vote) {
+			this.vote = vote;
+		}
+	}
+	private void onVoteResponse(VoteResponse res) {
+		print("VoteResponse [Coordinator " + this.id + "]");
+
+		if (hasDecided()){
+			return;
+		}
+
+		Vote v = res.vote;
+		if (v == Vote.YES) {
+			print("[Coordinator " + this.id + "] receive YES");
+			yesVoters.add(getSender());
+			if (quorumReachedYes()) {
+				fixDecision(Decision.COMMIT);
+				multicast(new DecisionResponse(decision));
+			}
+		} else {
+			print("[Coordinator " + this.id + "] receive NO");
+			fixDecision(Decision.ABORT);
+			multicast(new DecisionResponse(Decision.ABORT));
+		}
+	}
+	// ======================= //
+
+	// === DecisionRequest === //
+	/*
+	DecisionRequest manage to tell the replicas that still don't know the decision if a decision has come
+	 */
+	public static class DecisionRequest implements Serializable {}
+	private void onDecisionRequest(DecisionRequest req) {
+		if (hasDecided()){
+			getSender().tell(new DecisionResponse(decision), getSelf());
+		}
+	}
+	// ======================= //
+
+
+	// === DecisionResponse === //
+	/*
+	DecisionResponse manage to tell replica the decision the coordinator made
+	 */
+	public static class DecisionResponse implements Serializable {
+		public final Decision decision;
+		public DecisionResponse(Decision d) {
+			decision = d;
+		}
+	}
+	private void onDecisionResponse(DecisionResponse res) {
+		fixDecision(res.decision);
+	}
+	// ======================== //
+
 
 	// === Timeout === //
-	/*
 	public static class Timeout implements Serializable {}
 	public void onTimeout(Timeout msg) {
 		if (isCoordinator()){
@@ -147,92 +230,17 @@ class Replica extends AbstractActor {
 				multicast(new DecisionRequest());
 
 				// ask also the coordinator
-				coordinator.tell(new DecisionRequest(), getSelf());
+				replicas.get(coordinator).tell(new DecisionRequest(), getSelf());
 				setTimeout(DECISION_TIMEOUT);
 			}
 		}
-	}*/
-	// =============== //
-
-
-	// ====================== //
-	// === 2 phase commit === //
-	// ====================== //
-
-	// === VoteRequest === //
-	/*
-	All non-coordinator replicas will receive a VoteRequest and will answer with a VoteReponse
-	 */
-	public static class VoteRequest implements Serializable {
-		public VoteRequest() {
-		}
 	}
-	private void onVoteRequest(VoteRequest req) {
-		System.out.println("[ Replica " + this.id + "] received VoteRequest");
-		// this.coordinator = getSender().getId();
+	// ============= //
 
-		replicas.get(this.coordinator).tell(new VoteResponse(Vote.YES), getSelf());
-		setTimeout(DECISION_TIMEOUT);
-	}
+	// ============================================================================================================== //
+	// ======================================== /2 phase commit ===================================================== //
+	// ============================================================================================================== //
 
-	// === VoteResponse ===//
-	/*
-	The coordinator receive the replicas votes and decide wheter to push COMMIT or ABORT
-	 */
-	public static class VoteResponse implements Serializable {
-		public final Vote vote;
-		public VoteResponse(Vote vote) {
-			this.vote = vote;
-		}
-	}
-	private void onVoteResponse(VoteResponse res) {
-		System.out.println("[ Coordinator " + this.id + this.coordinator + "] received VoteRes");
-
-		if (hasDecided()){ // already decided and not caring about other votes
-			return;
-		}
-
-		Vote v = res.vote;
-		if (v == Vote.YES) {
-			yesVoters.add(getSender());
-			if (allVotedYes()) {
-				fixDecision(Decision.COMMIT);
-				multicast(new DecisionResponse(decision));
-			}
-		} else {
-			fixDecision(Decision.ABORT);
-			multicast(new DecisionResponse(Decision.ABORT));
-		}
-	}
-
-	// === DecisionRequest === //
-	public static class DecisionRequest implements Serializable {}
-	private void onDecisionRequest(DecisionRequest req) {
-	}
-	// ======================= //
-
-	// todo complete the decisions
-	// === DecisionResponse === //
-	public static class DecisionResponse implements Serializable {
-		public final Decision decision;
-		public DecisionResponse(Decision d) { decision = d; }
-	}
-	private void onDecisionResponse(DecisionResponse res) {
-	}
-	// ======================== //
-
-// ask all replicas the vote request
-	// tell all replicas the vote response
-	// coordinator timeout exceed
-	// replica timeout exceed
-	// timeout
-
-
-
-
-	// ================ //
-	// ==== /2 pc ===== //
-	// ================ //
 
 
 	// === Methods === //
@@ -249,21 +257,21 @@ class Replica extends AbstractActor {
 	}
 
 	void setTimeout(int time) {
-		// todo fix all the timeout stuff, now it's just useless.
 		print("Timeout Started");
-		/*getContext().system().scheduler().scheduleOnce(
+		getContext().system().scheduler().scheduleOnce(
 				Duration.create(time, TimeUnit.MILLISECONDS),
 				getSelf(),
 				new Timeout(), // the message to send
 				getContext().system().dispatcher(), getSelf()
-		);*/
+		);
 	}
 
 	boolean hasDecided() {
 		return decision != null;
 	}
-	boolean allVotedYes() { // returns true if all voted YES
-		return yesVoters.size() >= replicas.size();
+	boolean quorumReachedYes() {
+		print("Coordinator" + id + " check quorum");
+		return yesVoters.size() >= (replicas.size() / 2 )+ 1;
 	}
 	// fix the final decision of the current node
 	void fixDecision(Decision d) {
@@ -274,6 +282,9 @@ class Replica extends AbstractActor {
 	}
 	void print(String s) {
 		System.out.format("%2d: %s\n", id, s);
+	}
+	String trimGetSelf(String s){
+		return s.substring(30);
 	}
 
 
