@@ -35,8 +35,9 @@ class Replica extends AbstractActor {
 
 
 	protected final int id; // replica ID
-	protected final int v = 0; // internal value
-	protected final int coordinator; // coordinator ID
+	protected int v = 0; // internal value
+	protected int candidate = -1; // internal value
+	protected int coordinator; // coordinator ID
 	protected List<ActorRef> replicas; // the list of replicas
 
 	// 2pc
@@ -115,8 +116,9 @@ class Replica extends AbstractActor {
 	private void onWriteRequest(WriteRequest req) {
 		if (isCoordinator()) {
 			System.out.println("[ Coordinator ] received  : " + req);
-			System.out.println("[ [ Coordinator ]  write value : " + req.value);
+			System.out.println("[ Coordinator ] write value : " + req.value);
 			// start voterequest
+			this.candidate = req.value;
 			multicast(new VoteRequest());
 		} else {
 			System.out.println("[ Replica " + this.id + "] received  : " + req.value);
@@ -142,7 +144,6 @@ class Replica extends AbstractActor {
 	}
 	private void onVoteRequest(VoteRequest req) {
 		System.out.println("[ Replica " + this.id + "] received VoteRequest");
-		// this.coordinator = getSender().getId();
 
 		replicas.get(this.coordinator).tell(new VoteResponse(Vote.YES), getSelf());
 		setTimeout(DECISION_TIMEOUT);
@@ -160,7 +161,7 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onVoteResponse(VoteResponse res) {
-		print("VoteResponse [Coordinator " + this.id + "]");
+		print("[Coordinator " + this.id + "] VoteResponse received");
 
 		if (hasDecided()){
 			return;
@@ -172,12 +173,13 @@ class Replica extends AbstractActor {
 			yesVoters.add(getSender());
 			if (quorumReachedYes()) {
 				fixDecision(Decision.COMMIT);
-				multicast(new DecisionResponse(decision));
+				this.v = this.candidate;
+				multicast(new DecisionResponse(decision, this.candidate));
 			}
 		} else {
 			print("[Coordinator " + this.id + "] receive NO");
 			fixDecision(Decision.ABORT);
-			multicast(new DecisionResponse(Decision.ABORT));
+			multicast(new DecisionResponse(Decision.ABORT, this.candidate));
 		}
 	}
 	// ======================= //
@@ -189,7 +191,7 @@ class Replica extends AbstractActor {
 	public static class DecisionRequest implements Serializable {}
 	private void onDecisionRequest(DecisionRequest req) {
 		if (hasDecided()){
-			getSender().tell(new DecisionResponse(decision), getSelf());
+			getSender().tell(new DecisionResponse(decision, this.v), getSelf());
 		}
 	}
 	// ======================= //
@@ -201,18 +203,24 @@ class Replica extends AbstractActor {
 	 */
 	public static class DecisionResponse implements Serializable {
 		public final Decision decision;
-		public DecisionResponse(Decision d) {
+		public final int new_v;
+		public DecisionResponse(Decision d, int new_v) {
 			decision = d;
+			this.new_v = new_v;
 		}
 	}
 	private void onDecisionResponse(DecisionResponse res) {
+		this.v = res.new_v;
 		fixDecision(res.decision);
 	}
 	// ======================== //
 
 
 	// === Timeout === //
-	public static class Timeout implements Serializable {}
+	public static class Timeout implements Serializable {
+		public Timeout() {
+		}
+	}
 	public void onTimeout(Timeout msg) {
 		if (isCoordinator()){
 			if (!hasDecided()) {
@@ -220,7 +228,7 @@ class Replica extends AbstractActor {
 
 				// not decided in time means ABORT
 				fixDecision(Decision.ABORT);
-				multicast(new DecisionResponse(Decision.ABORT));
+				multicast(new DecisionResponse(Decision.ABORT, 0));
 			}
 		} else {
 			if (!hasDecided()) {
@@ -248,16 +256,15 @@ class Replica extends AbstractActor {
 		print("Multicasting");
 		for (ActorRef p: replicas) {
 			if (p.equals(getSelf())) { // so the coordinator will not send it to himself
-				print("Nope");
 			} else {
-				print("Voterequest sent to " + p);
+				print("Multicast sent to " + p);
 				p.tell(m, getSelf());
 			}
 		}
 	}
 
 	void setTimeout(int time) {
-		print("Timeout Started");
+		print("[ Replica " + id + "] Timeout Started");
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(time, TimeUnit.MILLISECONDS),
 				getSelf(),
@@ -273,13 +280,16 @@ class Replica extends AbstractActor {
 		print("Coordinator" + id + " check quorum");
 		return yesVoters.size() >= (replicas.size() / 2 )+ 1;
 	}
+
+	// todo where the fuck the new value is passed?
 	// fix the final decision of the current node
 	void fixDecision(Decision d) {
 		if (!hasDecided()) {
 			this.decision = d;
-			print("decided " + d);
+			print("[Replica " + id + "] decided " + d);
 		}
 	}
+
 	void print(String s) {
 		System.out.format("%2d: %s\n", id, s);
 	}
@@ -303,7 +313,7 @@ class Replica extends AbstractActor {
 				.match(JoinGroupMsg.class, this::onJoinGroupMsg)
 				.match(ReadRequest.class, this::onReadRequest)
 				.match(WriteRequest.class, this::onWriteRequest)
-				//.match(Timeout.class, this::onTimeout)
+				.match(Timeout.class, this::onTimeout)
 
 				// only replicas
 				.match(VoteRequest.class, this::onVoteRequest)
