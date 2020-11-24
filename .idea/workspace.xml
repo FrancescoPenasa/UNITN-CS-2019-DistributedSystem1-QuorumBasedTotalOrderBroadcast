@@ -52,6 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
@@ -95,6 +96,7 @@
       <workItem from="1605871128086" duration="6617000" />
       <workItem from="1605949885616" duration="8899000" />
       <workItem from="1606047010437" duration="8026000" />
+      <workItem from="1606227661868" duration="42000" />
     </task>
     <servers />
   </component>

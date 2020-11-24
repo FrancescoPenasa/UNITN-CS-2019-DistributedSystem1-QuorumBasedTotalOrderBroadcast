@@ -125,7 +125,7 @@ class Replica extends AbstractActor {
 			this.candidate = req.value;
 			multicast(new VoteRequest());
 			// timeout
-			setTimeout(500);
+			//setTimeout(500);
 		} else {
 			System.out.println("[ Replica " + this.id + "] received  : " + req.value);
 			System.out.println("[ Replica " + this.id + "] send to coordinator");
