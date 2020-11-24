@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import it.unitn.ds1.Replica.Crashed;
 import it.unitn.ds1.Replica.JoinGroupMsg;
+import it.unitn.ds1.Replica.WriteRequest;
+import scala.concurrent.duration.Duration;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 
@@ -40,7 +45,13 @@ public class QuorumBasedTotalOrderBroadcast {
 			system.actorOf(Client.props(id, replicas),"client" + id);
 		}
 
-		
+		 try {
+		      System.out.println(">>> Press ENTER to crash <<<");
+		      System.in.read();
+		      Crashed wr = new Crashed();
+		      replicas.get(3).tell(wr, null);
+		    } 
+		    catch (IOException ignored) {}
 		  
 	    System.out.println(">>> Press ENTER to exit <<<");
 	    try {

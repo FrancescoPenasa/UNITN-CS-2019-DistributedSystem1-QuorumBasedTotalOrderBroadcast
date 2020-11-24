@@ -3,9 +3,11 @@ package it.unitn.ds1;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+
 import scala.concurrent.duration.Duration;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +41,7 @@ class Replica extends AbstractActor {
 	protected int candidate = -1; // internal value
 	protected int coordinator; // coordinator ID
 	protected List<ActorRef> replicas; // the list of replicas
+	protected boolean crashed = false;
 
 	// 2pc
 	public enum Vote {NO, YES}
@@ -46,6 +49,7 @@ class Replica extends AbstractActor {
 	public Decision decision = null;
 
 	private final Set<ActorRef> yesVoters = new HashSet<>();
+
 
 	// === Constructor === //
 	public Replica(int id, int coordinator) {
@@ -120,6 +124,8 @@ class Replica extends AbstractActor {
 			// start voterequest
 			this.candidate = req.value;
 			multicast(new VoteRequest());
+			// timeout
+			setTimeout(500);
 		} else {
 			System.out.println("[ Replica " + this.id + "] received  : " + req.value);
 			System.out.println("[ Replica " + this.id + "] send to coordinator");
@@ -189,6 +195,7 @@ class Replica extends AbstractActor {
 	DecisionRequest manage to tell the replicas that still don't know the decision if a decision has come
 	 */
 	public static class DecisionRequest implements Serializable {}
+	// todo costruttore
 	private void onDecisionRequest(DecisionRequest req) {
 		if (hasDecided()){
 			getSender().tell(new DecisionResponse(decision, this.v), getSelf());
@@ -210,7 +217,9 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onDecisionResponse(DecisionResponse res) {
+		if(res.decision==Decision.COMMIT) {
 		this.v = res.new_v;
+		}
 		fixDecision(res.decision);
 	}
 	// ======================== //
@@ -223,6 +232,22 @@ class Replica extends AbstractActor {
 	}
 	public void onTimeout(Timeout msg) {
 		if (isCoordinator()){
+			if(yesVoters.size()!=(replicas.size()-1)) {
+				// check crash
+				for (int i = 0; i<replicas.size(); i++) {
+					if (yesVoters.contains(replicas.get(i))) {
+						
+					} else {
+						print("crashed" + replicas.get(i));
+						List<ActorRef> aList = new ArrayList<>(); 
+					    for (ActorRef x : yesVoters) 
+					      aList.add(x); 
+						updateReplicas(new JoinGroupMsg(aList)); 
+					}
+					
+				}
+				
+			
 			if (!hasDecided()) {
 				print("Timeout");
 
@@ -230,7 +255,7 @@ class Replica extends AbstractActor {
 				fixDecision(Decision.ABORT);
 				multicast(new DecisionResponse(Decision.ABORT, 0));
 			}
-		} else {
+		} }else {
 			if (!hasDecided()) {
 				print("Timeout. Asking around.");
 
@@ -240,13 +265,44 @@ class Replica extends AbstractActor {
 				// ask also the coordinator
 				replicas.get(coordinator).tell(new DecisionRequest(), getSelf());
 				setTimeout(DECISION_TIMEOUT);
-			}
-		}
+			}}
 	}
 	// ============= //
 
 	// ============================================================================================================== //
 	// ======================================== /2 phase commit ===================================================== //
+	// ============================================================================================================== //
+	
+	
+	// ============================================================================================================== //
+	// ======================================== crash detection ===================================================== //
+	// ============================================================================================================== //
+	
+	public static class Crashed implements Serializable {
+		public Crashed() {
+			
+		}
+	}
+	
+	private void onCrashed(Crashed req) {
+		crash();
+	}
+	
+	
+	  public void crash() {
+		      getContext().become(crashed());
+		      print("CRASH!!!");
+			}
+	   
+	   public Receive crashed() {
+		      return receiveBuilder()
+		              .matchAny(msg -> {})
+		              .build();
+		    }
+	
+	
+	// ============================================================================================================== //
+	// ======================================== /crash detection ==================================================== //
 	// ============================================================================================================== //
 
 
@@ -260,6 +316,16 @@ class Replica extends AbstractActor {
 				print("Multicast sent to " + p);
 				p.tell(m, getSelf());
 			}
+		}
+	}
+	
+	private void updateReplicas(Serializable m){
+		print("updating replicas");
+		for (ActorRef p: replicas) {
+			
+				print("Multicast sent to " + p);
+				p.tell(m, getSelf());
+			
 		}
 	}
 
@@ -303,6 +369,9 @@ class Replica extends AbstractActor {
 	public boolean isCoordinator() {
 		return this.coordinator == this.id;
 	}
+	public int getID() {
+		return this.id;
+	}
 	// ============= //
 
 
@@ -314,7 +383,7 @@ class Replica extends AbstractActor {
 				.match(ReadRequest.class, this::onReadRequest)
 				.match(WriteRequest.class, this::onWriteRequest)
 				.match(Timeout.class, this::onTimeout)
-
+				.match(Crashed.class, this::onCrashed)
 				// only replicas
 				.match(VoteRequest.class, this::onVoteRequest)
 				.match(DecisionRequest.class, this::onDecisionRequest)
