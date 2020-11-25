@@ -28,6 +28,13 @@ Coordinator is determined by the value "coordinator", and it can receive a propo
 // replica finally get the answer
 
 class Replica extends AbstractActor {
+	// === debug === //
+	final boolean DEBUG = true;
+	final boolean REPLICA2_CRASH_ON_VOTE = true;
+	final boolean COORDINATOR_CRASH_ON_HB = true;
+	final boolean COORDINATOR_CRASH_ON_DECISION = true;
+	int ttl = 3; // turns before crash
+
 	// === const === //
 	final static int VOTE_TIMEOUT = 1000;      // timeout for the votes, ms
 	final static int DECISION_TIMEOUT = 2000;  // timeout for the decision, ms
@@ -103,6 +110,14 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onReadRequest(ReadRequest req) {
+		if (DEBUG && REPLICA2_CRASH_ON_VOTE && this.id == 2){
+			if(this.ttl-- == 0){
+				crash();
+				return;
+			}
+		}
+
+
 		if (crashed) {
 			// todo insert crash exception
 		}
@@ -171,7 +186,7 @@ class Replica extends AbstractActor {
 
 
 
-		// ============================================================================================================== //
+	// ============================================================================================================== //
 	// ======================================== 2 phase commit ====================================================== //
 	// ============================================================================================================== //
 
@@ -193,7 +208,7 @@ class Replica extends AbstractActor {
 		replicas.get(this.coordinator).tell(new VoteResponse(Vote.YES), getSelf());
 
 		// todo timeout
-		setTimeout(DECISION_TIMEOUT);
+		setTimeout(VOTE_TIMEOUT);
 	}
 	// ==================== //
 
@@ -298,7 +313,7 @@ class Replica extends AbstractActor {
 					multicast(new JoinGroupMsg(new_replicas, getID()), new_replicas);
 					fixDecision(Decision.ABORT);
 					multicast(new DecisionResponse(Decision.ABORT, 0));
-					setTimeout(VOTE_TIMEOUT);
+					setTimeout(DECISION_TIMEOUT);
 				}
 				if (!hasDecided() && !isCoordinator()) { // replica dont receive DecisionResponse
 					print("Timeout on DecisionResponse, coordinator crashed");
