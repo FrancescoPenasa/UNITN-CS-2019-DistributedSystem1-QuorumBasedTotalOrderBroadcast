@@ -30,10 +30,11 @@ Coordinator is determined by the value "coordinator", and it can receive a propo
 class Replica extends AbstractActor {
 	// === debug === //
 	final boolean DEBUG = true;
-	final boolean REPLICA2_CRASH_ON_VOTE = true;
-	final boolean COORDINATOR_CRASH_ON_HB = true;
+	final boolean REPLICA2_CRASH_ON_VOTE = false;
+	final boolean COORDINATOR_CRASH_ON_HB = false;
 	final boolean COORDINATOR_CRASH_ON_DECISION = true;
-	int ttl = 3; // turns before crash
+	Cancellable heartbeatTimer = null;
+	int ttl = 2; // turns before crash
 
 	// === const === //
 	final static int VOTE_TIMEOUT = 1000;      // timeout for the votes, ms
@@ -110,13 +111,22 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onReadRequest(ReadRequest req) {
+		if (DEBUG && COORDINATOR_CRASH_ON_HB && isCoordinator()){
+			if(this.ttl-- == 0){ // crash after ttl reads and stop send
+				if (heartbeatTimer != null) {
+					heartbeatTimer.cancel();
+					print("heartbeat cancelled" + heartbeatTimer.isCancelled());
+					crash();
+					return;
+				}
+			}
+		}
 		if (DEBUG && REPLICA2_CRASH_ON_VOTE && this.id == 2){
 			if(this.ttl-- == 0){
 				crash();
 				return;
 			}
 		}
-
 
 		if (crashed) {
 			// todo insert crash exception
@@ -238,6 +248,14 @@ class Replica extends AbstractActor {
 			yesVoters.add(getSender());
 
 			// commit requirement reached
+			if (DEBUG && COORDINATOR_CRASH_ON_DECISION && quorumReachedYes()){
+				fixDecision(Decision.COMMIT);
+				List<ActorRef> someVoters = yesVoters;
+				someVoters.remove(0);
+				someVoters.remove(1);
+				multicast(new DecisionResponse(decision, this.candidate), someVoters);
+				crash();
+			}
 			if (quorumReachedYes()) {
 				this.v = this.candidate;
 				fixDecision(Decision.COMMIT);
@@ -281,6 +299,7 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onDecisionResponse(DecisionResponse res) {
+
 		print("sending DecisionResponse to " + getSender().path().name() + " decision " + decision + " v = "+ res.new_v);
 		if (res.decision==Decision.COMMIT) {
 			this.v = res.new_v;
@@ -395,7 +414,7 @@ class Replica extends AbstractActor {
 		for (ActorRef p: replicas) {
 			if (p.equals(getSelf())) { // so the coordinator will not send it to himself
 			} else {
-				Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
+				 heartbeatTimer = getContext().system().scheduler().scheduleWithFixedDelay(
 						Duration.create(HEARTBEAT, TimeUnit.MILLISECONDS),               // when to start generating messages
 						Duration.create(HEARTBEAT, TimeUnit.MILLISECONDS),               // how frequently generate them
 						p,								// dst
