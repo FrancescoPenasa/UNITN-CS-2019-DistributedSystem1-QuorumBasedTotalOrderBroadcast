@@ -18,6 +18,9 @@ Client requests. The client can issue read and write requests to any replica. Bo
 the ActorRef of the client. The write request also contains the new proposed value v*.
  */
 public class Client extends AbstractActor{
+
+	final static int DELAY = 100;  // delay in msg communication
+
 	// === variables === //
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
@@ -65,7 +68,7 @@ public class Client extends AbstractActor{
 	private Serializable sendWriteReq(int ID, int v){
 		WriteRequest wr = new WriteRequest(v);
 		getContext().system().scheduler().scheduleOnce(
-				Duration.create(3, TimeUnit.SECONDS),
+				Duration.create(DELAY, TimeUnit.MILLISECONDS),
 				replicas.get(ID),
 				wr,
 				getContext().system().dispatcher(),
@@ -73,10 +76,12 @@ public class Client extends AbstractActor{
 		);
 		return wr;
 	}
+
+	// todo add timeout on read to send a new one
 	private Serializable sendReadReq(int ID){
 		ReadRequest rr = new ReadRequest();
 		getContext().system().scheduler().scheduleOnce(
-				Duration.create(3, TimeUnit.SECONDS),
+				Duration.create(DELAY, TimeUnit.MILLISECONDS),
 				replicas.get(ID),
 				rr,
 				getContext().system().dispatcher(),
@@ -96,7 +101,7 @@ public class Client extends AbstractActor{
 		}
 	}
 	private void onReadResponse(ReadResponse rr){
-		System.out.println("Client" + this.id + " received v = " + rr.v + " from " + getSender());
+		print("Received v = " + rr.v + " from " + getSender().path().name());
 	}
 
 	/*
@@ -114,13 +119,12 @@ public class Client extends AbstractActor{
 		if (getRandomAction()){ // update request
 			int v = getRandomValue();
 			req = sendWriteReq(ID, v);
-			System.out.println("sent update request to replica" + ID + " from" + getSelf() + " with value " + v);
+			print("send WriteRequest to " + replicas.get(ID).path().name() + " v = " + v);;
 		}
 		else { // read request
 			req = sendReadReq(ID);
-			System.out.println("sent read request to:" + ID + " from" + getSelf());
+			print("send ReadRequest to " + replicas.get(ID).path().name());
 		}
-		System.out.println(req);
 	}
 
 	/*
@@ -129,8 +133,8 @@ public class Client extends AbstractActor{
 	@Override
 	  public void preStart() {
 		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-			Duration.create(5, TimeUnit.SECONDS),               // when to start generating messages
-			Duration.create(5, TimeUnit.SECONDS),               // how frequently generate them
+			Duration.create(2000, TimeUnit.MILLISECONDS),               // when to start generating messages
+			Duration.create(2000, TimeUnit.MILLISECONDS),               // how frequently generate them
 			getSelf(),								// dst
 			new WakeUpMsg("WakeUp" + getSelf().path().name()), // the message to send
 			getContext().system().dispatcher(),                 // system dispatcher
@@ -145,6 +149,10 @@ public class Client extends AbstractActor{
 				.match(WakeUpMsg.class, this::onWakeUpMsg)
 				.match(ReadResponse.class, this::onReadResponse)
 				.build();
+	}
+
+	void print(String s) {
+		System.out.format("Client%2d: %s\n", id, s);
 	}
 
 }

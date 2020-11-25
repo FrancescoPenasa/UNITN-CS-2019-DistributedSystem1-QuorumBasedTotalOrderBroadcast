@@ -13,8 +13,6 @@ import scala.concurrent.duration.Duration;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 
-// todo SISTEMARE UPDATE REQUEST CON LE CARATTERISTICHE 2PC.
-
 public class QuorumBasedTotalOrderBroadcast {
 	// === CONSTANTS === //
 	  final private static int N_REPLICAS = 5;
@@ -35,7 +33,7 @@ public class QuorumBasedTotalOrderBroadcast {
 
 		// Send the replicas members to all replicas
 		replicas = Collections.unmodifiableList(replicas);
-		JoinGroupMsg join = new JoinGroupMsg(replicas);
+		JoinGroupMsg join = new JoinGroupMsg(replicas, 0);
 		for (ActorRef peer: replicas) {
 		  peer.tell(join, null);
 		}
