@@ -99,7 +99,9 @@
       <workItem from="1606227661868" duration="42000" />
       <workItem from="1606259861756" duration="4717000" />
       <workItem from="1606321784334" duration="2312000" />
-      <workItem from="1606335395055" duration="1082000" />
+      <workItem from="1606335395055" duration="1771000" />
+      <workItem from="1606923910154" duration="3814000" />
+      <workItem from="1606948346888" duration="4122000" />
     </task>
     <servers />
   </component>
@@ -127,22 +129,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1605872528360" />
-    <state width="1877" height="266" key="GridCell.Tab.0.bottom" timestamp="1606336175248">
+    <state width="1877" height="639" key="GridCell.Tab.0.bottom" timestamp="1606957208353">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606336175248" />
-    <state width="1877" height="266" key="GridCell.Tab.0.center" timestamp="1606336175248">
+    <state width="1877" height="639" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606957208353" />
+    <state width="1877" height="639" key="GridCell.Tab.0.center" timestamp="1606957208352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606336175248" />
-    <state width="1877" height="266" key="GridCell.Tab.0.left" timestamp="1606336175248">
+    <state width="1877" height="639" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606957208352" />
+    <state width="1877" height="639" key="GridCell.Tab.0.left" timestamp="1606957208352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606336175248" />
-    <state width="1877" height="266" key="GridCell.Tab.0.right" timestamp="1606336175248">
+    <state width="1877" height="639" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606957208352" />
+    <state width="1877" height="639" key="GridCell.Tab.0.right" timestamp="1606957208352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606336175248" />
+    <state width="1877" height="639" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606957208352" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1601976257828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -179,6 +181,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606263966200" />
+    <state x="755" y="267" key="refactoring.ChangeSignatureDialog" timestamp="1606956469758">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="755" y="267" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606956469758" />
     <state x="136" y="244" key="run.anything.popup" timestamp="1605965044440">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -3,6 +3,7 @@ package it.unitn.ds1;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import akka.actor.AbstractActor;
@@ -16,6 +17,13 @@ import scala.concurrent.duration.Duration;
 /*
 Client requests. The client can issue read and write requests to any replica. Both types of request contain
 the ActorRef of the client. The write request also contains the new proposed value v*.
+
+Specifications:
+The client can issue read and write requests to any replica. Both types of request contain
+the ActorRef of the client. The write request also contains the new proposed value v*. For read operations, the
+replica will reply immediately with its local value. For write operations, instead, the request will be forwarded
+to the coordinator.
+
  */
 public class Client extends AbstractActor{
 
@@ -132,9 +140,10 @@ public class Client extends AbstractActor{
 	 */
 	@Override
 	  public void preStart() {
+
 		Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
-			Duration.create(2000, TimeUnit.MILLISECONDS),               // when to start generating messages
-			Duration.create(2000, TimeUnit.MILLISECONDS),               // how frequently generate them
+			Duration.create(ThreadLocalRandom.current().nextInt(1000, 5000), TimeUnit.MILLISECONDS),               // when to start generating messages
+			Duration.create(ThreadLocalRandom.current().nextInt(1000, 10000), TimeUnit.MILLISECONDS),               // how frequently generate them
 			getSelf(),								// dst
 			new WakeUpMsg("WakeUp" + getSelf().path().name()), // the message to send
 			getContext().system().dispatcher(),                 // system dispatcher
