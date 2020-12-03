@@ -87,6 +87,7 @@ public class Client extends AbstractActor{
 
 	// todo add timeout on read to send a new one
 	private Serializable sendReadReq(int ID){
+		print("read req to " + ID);
 		ReadRequest rr = new ReadRequest();
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(DELAY, TimeUnit.MILLISECONDS),
@@ -109,7 +110,7 @@ public class Client extends AbstractActor{
 		}
 	}
 	private void onReadResponse(ReadResponse rr){
-		print("Received v = " + rr.v + " from " + getSender().path().name());
+		print("read done " + rr.v);
 	}
 
 	/*

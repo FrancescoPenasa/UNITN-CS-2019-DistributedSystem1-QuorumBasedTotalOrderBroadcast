@@ -54,8 +54,8 @@ class Replica extends AbstractActor {
 	protected List<ActorRef> replicas; // the list of replicas
 
 	// Transaction ID
-	private Stack<Pair<Integer, Integer>> history = new Stack<>();
-	private Pair<Integer, Integer> timeStamp = new Pair<Integer, Integer>(0, 0);	// epoch and sequence number
+	private final Stack<Pair<Integer, Integer>> history = new Stack<>();
+	private Pair<Integer, Integer> timeStamp = new Pair<>(0, 0);	// epoch and sequence number
 	private Integer epoch = 0;
 	private Integer sequence_number = 0;
 
@@ -351,6 +351,8 @@ class Replica extends AbstractActor {
 			this.sequence_number = timeStamp.getValue();
 			this.history.add(this.timeStamp);
 			this.v = res.new_v;
+
+			print("update " + this.epoch+ ':' + this.sequence_number + ' ' + this.v);
 		}
 		fixDecision(res.decision);
 	}
