@@ -1,3 +1,5 @@
+
+
 package it.unitn.ds1;
 
 import java.io.IOException;
@@ -5,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import it.unitn.ds1.Replica.CoordinatorElectionMessage;
 import it.unitn.ds1.Replica.Crashed;
 import it.unitn.ds1.Replica.JoinGroupMsg;
 import it.unitn.ds1.Replica.WriteRequest;
@@ -28,10 +30,11 @@ public class QuorumBasedTotalOrderBroadcast {
 		List<ActorRef> replicas = new ArrayList<>();
 		int coordinatorID = 0;
 		for(int id=0; id<N_REPLICAS; id++) {
-			replicas.add(system.actorOf(Replica.props(id, coordinatorID),"replica"+id));
+			replicas.add(system.actorOf(Replica.props(id, coordinatorID)));
 	  	}
 
 		// Send the replicas members to all replicas
+		
 		replicas = Collections.unmodifiableList(replicas);
 		JoinGroupMsg join = new JoinGroupMsg(replicas, 0);
 		for (ActorRef peer: replicas) {
@@ -42,12 +45,14 @@ public class QuorumBasedTotalOrderBroadcast {
 		for(int id=0; id<N_CLIENTS; id++) {
 			system.actorOf(Client.props(id, replicas),"client" + id);
 		}
+		
+		
 
 		 try {
-		      System.out.println(">>> Press ENTER to crash <<<");
+		      System.out.println(">>> Press ENTER to run Election <<<");
 		      System.in.read();
-		      Crashed wr = new Crashed();
-		      replicas.get(3).tell(wr, null);
+		      
+		      
 		    } 
 		    catch (IOException ignored) {}
 		  

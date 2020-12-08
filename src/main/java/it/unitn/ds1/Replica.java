@@ -65,7 +65,9 @@ class Replica extends AbstractActor {
 	public enum Decision {ABORT, COMMIT}
 	public Decision decision = null;
 	private final List<ActorRef> yesVoters = new ArrayList<>();
-
+	
+	//Election
+	private boolean electionMessageReceived = false;
 
 	// === Constructor === //
 	public Replica(int id, int coordinator) {
@@ -224,6 +226,8 @@ class Replica extends AbstractActor {
 		lastHeartbeat = System.currentTimeMillis();
 		print("Heartbeat received, restart timeout at time : " + lastHeartbeat);
 		setTimeout(HEARTBEAT_TIMEOUT);
+		
+		
 	}
 	// ========================== //
 
@@ -353,6 +357,8 @@ class Replica extends AbstractActor {
 			this.v = res.new_v;
 
 			print("update " + this.epoch+ ':' + this.sequence_number + ' ' + this.v);
+			if(id==1) {
+			coordinatorElection();}
 		}
 		fixDecision(res.decision);
 	}
@@ -397,6 +403,146 @@ class Replica extends AbstractActor {
 
 	// ============================================================================================================== //
 	// ======================================== /2 phase commit ===================================================== //
+	// ============================================================================================================== //
+	
+	// ============================================================================================================== //
+	// ======================================== leader election ===================================================== //
+	// ============================================================================================================== //	
+	
+	public static class CoordinatorElectionMessage implements Serializable {
+		public int idReplica; //non so se serve
+		public final List<Pair<Integer, Pair<Integer, Integer>>> lastUpdates = new ArrayList<Pair<Integer, Pair<Integer, Integer>>>();
+		public CoordinatorElectionMessage(int idReplica, Pair<Integer, Integer> lastUpdate ) {
+			lastUpdates.add(new Pair(idReplica, lastUpdate));
+			
+		}
+	}
+	
+	private void onCoordinatorElectionMessage(CoordinatorElectionMessage msg) {
+		print("Replica :"+msg.idReplica+" has send new CoorElMsg to me Replica: "+id+" with last updates in :"+msg.lastUpdates);
+		
+		if(electionMessageReceived) {
+			//check If I can be the new coordinator else forward message
+			int maxSqNb = 0;
+			int countMax = 1;
+			int indexMax = 0;
+			
+			//find the last update sequence number
+			for(Pair<Integer, Pair<Integer, Integer>> lastUpdateSqNb : msg.lastUpdates){
+				if(maxSqNb<lastUpdateSqNb.getValue().getValue()) {
+					maxSqNb=lastUpdateSqNb.getValue().getValue();
+					indexMax = lastUpdateSqNb.getKey();//set the index of the replica with the last update
+				}
+				
+				//check how many equal last update
+				else if(maxSqNb==lastUpdateSqNb.getValue().getValue()) {
+					countMax=countMax+1;
+					
+				}
+			}
+			
+			//if there are more than one replica with the last update, find the highest id of replica
+			int maxID = 0;
+			if (countMax>1){
+				print("This is the count of equal updates :"+countMax);
+				for(Pair<Integer, Pair<Integer, Integer>> lastUpdateID : msg.lastUpdates){
+					//print("Entro nel ciclo con max: "+maxID+" e key"+lastUpdateID.getKey());
+					if(maxID<=lastUpdateID.getKey() && maxSqNb==lastUpdateID.getValue().getValue()) {
+						maxID=lastUpdateID.getKey();
+						indexMax = lastUpdateID.getKey(); //Find the index of max id
+						//print("Aggiorno Max: "+maxID+" e indexMax"+indexMax);
+					}
+				}
+		    }
+			
+			//check and send the new coordinator
+			print("This is my ID :"+id+" and IndexMax is :"+indexMax);
+			if (id == indexMax) {
+				print("I am the coordinator!");
+				sendSync(id); //todo finish the sendSync
+				return;
+			}
+			
+		}
+		//Find next replica to send message
+		ActorRef nextReplica;
+		int replicaIndex = replicas.indexOf(getSelf());
+		
+		if (replicas.size()-1==replicas.indexOf(getSelf())) {
+			nextReplica = replicas.get(0);
+		}else {	
+			nextReplica = replicas.get(replicaIndex+1);
+		}
+		
+		//Update coordinator election message
+		if(!electionMessageReceived) {
+			msg.idReplica=id;
+			msg.lastUpdates.add(new Pair(id, timeStamp));
+			nextReplica.tell(msg, getSelf());
+			electionMessageReceived = true;
+		}else {
+			msg.idReplica=id;
+			nextReplica.tell(msg, getSelf());
+		}
+				
+		 //set the first time that a election message arrives
+		
+		//ACKnowledge the message
+		getSender().tell(new CoordinatorElectionMessageACK(), getSelf());
+		
+	}
+	
+	
+	public static class CoordinatorElectionMessageACK implements Serializable {
+		public CoordinatorElectionMessageACK() {}
+			
+	}
+	
+	private void onCoordinatorElectionMessageACK(CoordinatorElectionMessageACK msg) {
+		print("Message to: "+getSender()+" ACKnowledged");
+	}
+	
+	public static class SynchronizationMessage implements Serializable {
+		int id;
+		public SynchronizationMessage(int id) {
+			this.id = id;
+		}
+			
+	}
+	
+	private void onSynchronizationMessage(SynchronizationMessage msg) {
+		electionMessageReceived = false;
+		print("The new coordinator is: "+getSender()+" with ID>:" +msg.id);
+	}
+	
+	
+	
+	void coordinatorElection() {
+		
+		//Find next replica and start new coordinator election message
+		ActorRef nextReplica;
+		int replicaIndex = replicas.indexOf(getSelf());
+		
+		if (replicas.size()-1==replicas.indexOf(getSelf())) {
+			nextReplica = replicas.get(0);
+		}else {	
+			nextReplica = replicas.get(replicaIndex+1);
+		}
+		
+		
+		//set true because it initialize the coordinator election
+		electionMessageReceived = true;
+		//print("Replica next to: "+getSelf()+" is: "+nextReplica);
+		nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+	}
+	
+	void sendSync(int id) {
+		electionMessageReceived = false;
+		multicast(new SynchronizationMessage(id));
+	}
+	
+	// ============================================================================================================== //
+	// ======================================== /leader election =================================================== //
 	// ============================================================================================================== //
 
 
@@ -546,9 +692,11 @@ class Replica extends AbstractActor {
 				// only replicas
 				.match(VoteRequest.class, this::onVoteRequest)
 				.match(DecisionRequest.class, this::onDecisionRequest)
-
 				.match(ReceivingHeartbeat.class, this::onReceivingHeartbeat)
-
+				//election message
+				.match(CoordinatorElectionMessage.class, this::onCoordinatorElectionMessage)
+				.match(CoordinatorElectionMessageACK.class, this::onCoordinatorElectionMessageACK)
+				.match(SynchronizationMessage.class, this::onSynchronizationMessage)
 				// only coordinator
 				.match(VoteResponse.class, this::onVoteResponse)
 				.match(DecisionResponse.class, this::onDecisionResponse)
