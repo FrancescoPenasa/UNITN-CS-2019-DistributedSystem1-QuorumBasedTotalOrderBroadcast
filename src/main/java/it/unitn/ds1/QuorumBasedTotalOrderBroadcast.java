@@ -53,6 +53,7 @@ public class QuorumBasedTotalOrderBroadcast {
 		      System.in.read();
 		      
 		      
+		      
 		    } 
 		    catch (IOException ignored) {}
 		  
