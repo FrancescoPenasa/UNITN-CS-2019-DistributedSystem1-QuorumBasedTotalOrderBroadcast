@@ -75,7 +75,14 @@ class Replica extends AbstractActor {
 	public int indexNextReplica = 0;
 	public List<Pair<Integer, Pair<Integer, Integer>>> mylastUpdates = new ArrayList<Pair<Integer, Pair<Integer, Integer>>>();
 	public CoordinatorElectionMessage msg = null;
-
+	public boolean lastUpdateReceived = true;
+	
+	//Uniform agreement
+	public static List<Integer> indexesOfReplicaWithoutUpdate = new LinkedList<Integer>();
+	
+	
+	
+	
 	// === Constructor === //
 	public Replica(int id, int coordinator) {
 		this.id = id;
@@ -267,6 +274,7 @@ class Replica extends AbstractActor {
 
 		// todo timeout
 		setTimeout(Timeout.VOTE);
+		setTimeout(Timeout.DECISION);
 	}
 	// ==================== //
 
@@ -321,22 +329,7 @@ class Replica extends AbstractActor {
 	}
 	// ======================= //
 
-	// === DecisionRequest === //
-	/*
-	DecisionRequest manage to tell the replicas that still don't know the decision if a decision has come
-	 */
-	public static class DecisionRequest implements Serializable {
-		public DecisionRequest() {
-		}
-	}
-	private void onDecisionRequest(DecisionRequest req) {
-		if (hasDecided()){
-			print("received DecisionRequest from " + getSender().path().name());
-			print("answering DecisionRequest to " + getSender().path().name() + " decision = " + decision + " v = " + this.v);
-			getSender().tell(new DecisionResponse(decision, this.v, this.timeStamp), getSelf());
-		}
-	}
-	// ======================= //
+
 
 
 	// === DecisionResponse === //
@@ -355,7 +348,7 @@ class Replica extends AbstractActor {
 		}
 	}
 	private void onDecisionResponse(DecisionResponse res) {
-		// todo is it total order or fifo?
+		// todo is it total order or fifo? Decisione null? Non ha ricevuto il valore? WRITE OK MESSAGES !!
 		print("sending DecisionResponse to " + getSender().path().name() + " decision " + decision + " v = "+ res.new_v);
 		if (res.decision==Decision.COMMIT) {
 			this.timeStamp = res.timeStamp;
@@ -403,9 +396,10 @@ class Replica extends AbstractActor {
 		}
 	}
 	public void onDecisionTimeout(DecisionTimeout msg) {
+		//problema entrano più di una replica prima che parta l'elezione
 		if (!hasDecided() && !isCoordinator() &&!electionStarted) {
 			print("Timeout on DecisionResponse, coordinator crashed");
-			multicast(new DecisionRequest());
+			//multicast(new DecisionRequest());
 
 			// todo start new Election
 			if(!electionStarted) {
@@ -415,8 +409,10 @@ class Replica extends AbstractActor {
 				electionMessageReceived = true;
 				//coordinatorElection();
 				nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+			}else {
+				print("Election in progress");
 			}
-			setTimeout(Timeout.DECISION);
+			//setTimeout(Timeout.DECISION);
 		}
 	}
 
@@ -432,6 +428,16 @@ class Replica extends AbstractActor {
 			print("Heartbeat not received, coordinator crashed");
 
 			// todo start new Election
+			if(!electionStarted) {
+				electionStarted = true;
+				ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf()));
+				indexNextReplica = replicas.indexOf(getSelf());
+				electionMessageReceived = true;
+				//coordinatorElection();
+				nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+			}else {
+				print("Election in progress");
+			}
 
 			setTimeout(Timeout.HEARTBEAT);
 		}
@@ -496,6 +502,8 @@ class Replica extends AbstractActor {
 					countMax=countMax+1;
 					
 				}
+			
+			
 			}
 			
 			//if there are more than one replica with the last update, find the highest id of replica
@@ -515,8 +523,25 @@ class Replica extends AbstractActor {
 			//check and send the new coordinator
 			print("This is my ID :"+id+" and IndexMax is :"+indexMax);
 			if (id == indexMax) {
+				
+				//check replicas that don't have the last update
+				for(Pair<Integer, Pair<Integer, Integer>> lastUpdate: msg.lastUpdates) {
+					if(maxSqNb!= lastUpdate.getValue().getValue()) {
+						indexesOfReplicaWithoutUpdate.add(replicas.indexOf(replicas.get(lastUpdate.getKey())));
+						
+					}
+				}
+				
+				
+				
+				
+				
 				print("I am the coordinator!");
-				sendSync(id); //todo finish the sendSync
+				
+				print("Replicas without last update => "+indexesOfReplicaWithoutUpdate.toString());
+				
+				sendSync(id, this.v); //todo finish the sendSync
+				updateEpoch();
 				return;
 			}
 			
@@ -556,8 +581,10 @@ class Replica extends AbstractActor {
 	
 	public static class SynchronizationMessage implements Serializable {
 		int id;
-		public SynchronizationMessage(int id) {
+		int value;
+		public SynchronizationMessage(int id, int value) {
 			this.id = id;
+			this.value = value;
 		}
 			
 	}
@@ -565,8 +592,19 @@ class Replica extends AbstractActor {
 	private void onSynchronizationMessage(SynchronizationMessage msg) {
 		electionMessageReceived = false;
 		electionStarted = false;
+		
+		print("The new coordinator is: "+getSender()+" with ID:" +msg.id);
+		//if an the index of the replica is present inside the list, the replica delivers the new value
+		for(int i=0; i<indexesOfReplicaWithoutUpdate.size(); i++) {
+			if(replicas.indexOf(getSelf())==indexesOfReplicaWithoutUpdate.get(i)) {
+				this.v = msg.value;
+				print("Replica "+indexesOfReplicaWithoutUpdate.get(i)+" updated => New replica value : "+this.v);
+			}
+		}
+		
 		coordinator = msg.id;
-		print("The new coordinator is: "+getSender()+" with ID>:" +msg.id);
+		
+		updateEpoch();
 	}
 	
 	
@@ -586,9 +624,9 @@ class Replica extends AbstractActor {
 		setTimeout(Timeout.ELECTION);
 	}
 	
-	void sendSync(int id) {
+	void sendSync(int id, int value) {
 		electionMessageReceived = false;
-		multicast(new SynchronizationMessage(id));
+		multicast(new SynchronizationMessage(id, value));
 	}
 	
 	public ActorRef getNextReplica(int replicaIndex) {
@@ -786,7 +824,7 @@ class Replica extends AbstractActor {
 
 				// only replicas
 				.match(VoteRequest.class, this::onVoteRequest)
-				.match(DecisionRequest.class, this::onDecisionRequest)
+		
 				.match(ReceivingHeartbeat.class, this::onReceivingHeartbeat)
 
 				//election message
