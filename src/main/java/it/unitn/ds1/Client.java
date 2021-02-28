@@ -74,6 +74,7 @@ public class Client extends AbstractActor{
 
 
 	private Serializable sendWriteReq(int ID, int v){
+		print("write req to " + ID);
 		WriteRequest wr = new WriteRequest(v);
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(DELAY, TimeUnit.MILLISECONDS),
@@ -99,7 +100,6 @@ public class Client extends AbstractActor{
 		return rr;
 	}
 
-
 	/*
 		Read the value sent from the replica after a read request
 	 */
@@ -122,17 +122,18 @@ public class Client extends AbstractActor{
 			this.msg = msg;
 		}
 	}
+	
 	private	void onWakeUpMsg(WakeUpMsg msg){
 		int ID = getRandomID();
 		Serializable req = null;
 		if (getRandomAction()){ // update request
 			int v = getRandomValue();
 			req = sendWriteReq(ID, v);
-			print("send WriteRequest to " + replicas.get(ID).path().name() + " v = " + v);;
+		
 		}
 		else { // read request
 			req = sendReadReq(ID);
-			print("send ReadRequest to " + replicas.get(ID).path().name());
+		
 		}
 	}
 

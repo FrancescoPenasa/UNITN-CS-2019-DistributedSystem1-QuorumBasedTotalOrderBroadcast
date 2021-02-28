@@ -46,16 +46,6 @@ public class QuorumBasedTotalOrderBroadcast {
 			system.actorOf(Client.props(id, replicas),"client" + id);
 		}
 		
-		
-
-		 try {
-		      System.out.println(">>> Press ENTER to run Election <<<");
-		      System.in.read();
-		      
-		      
-		      
-		    } 
-		    catch (IOException ignored) {}
 		  
 	    System.out.println(">>> Press ENTER to exit <<<");
 	    try {
