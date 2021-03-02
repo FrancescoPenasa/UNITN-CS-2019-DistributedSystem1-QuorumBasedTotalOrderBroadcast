@@ -16,10 +16,6 @@ import scala.concurrent.duration.Duration;
 
 /*
 Client requests. The client can issue read and write requests to any replica. Both types of request contain
-the ActorRef of the client. The write request also contains the new proposed value v*.
-
-Specifications:
-The client can issue read and write requests to any replica. Both types of request contain
 the ActorRef of the client. The write request also contains the new proposed value v*. For read operations, the
 replica will reply immediately with its local value. For write operations, instead, the request will be forwarded
 to the coordinator.
@@ -46,7 +42,7 @@ public class Client extends AbstractActor{
 
 
 	/*
-	get a random id of a replica
+	get a random replica ID
 	 */
 	private int getRandomID(){
 		Random rand = new Random();
@@ -72,7 +68,9 @@ public class Client extends AbstractActor{
 
 
 
-
+	/*
+	Method to send a write request for the value @v to replica @ID
+	 */
 	private Serializable sendWriteReq(int ID, int v){
 		print("write req to " + ID);
 		WriteRequest wr = new WriteRequest(v);
@@ -86,7 +84,9 @@ public class Client extends AbstractActor{
 		return wr;
 	}
 
-	// todo add timeout on read to send a new one
+	/*
+	Method to send a read request to replica @ID
+	 */
 	private Serializable sendReadReq(int ID){
 		print("read req to " + ID);
 		ReadRequest rr = new ReadRequest();
@@ -101,7 +101,7 @@ public class Client extends AbstractActor{
 	}
 
 	/*
-		Read the value sent from the replica after a read request
+	Read the value sent from the replica after a read request
 	 */
 	public static class ReadResponse implements Serializable{
 		private final int v;
@@ -114,7 +114,7 @@ public class Client extends AbstractActor{
 	}
 
 	/*
-	WakeUp decide to which replica and which type of msg to send.
+	Decide to which replica and which type of msg send (read or write).
 	 */
 	public class WakeUpMsg implements Serializable{
 		private final String msg;
@@ -122,18 +122,15 @@ public class Client extends AbstractActor{
 			this.msg = msg;
 		}
 	}
-	
 	private	void onWakeUpMsg(WakeUpMsg msg){
 		int ID = getRandomID();
 		Serializable req = null;
 		if (getRandomAction()){ // update request
 			int v = getRandomValue();
 			req = sendWriteReq(ID, v);
-		
 		}
 		else { // read request
 			req = sendReadReq(ID);
-		
 		}
 	}
 
@@ -153,7 +150,6 @@ public class Client extends AbstractActor{
 	}
 
 
-
 	@Override
 	public Receive createReceive() {
 		return receiveBuilder()
@@ -165,5 +161,4 @@ public class Client extends AbstractActor{
 	void print(String s) {
 		System.out.format("Client%2d: %s\n", id, s);
 	}
-
 }

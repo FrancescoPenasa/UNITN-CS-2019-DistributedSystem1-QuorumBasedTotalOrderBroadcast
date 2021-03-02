@@ -8,7 +8,34 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20985a6c-eb57-4123-975e-55a81d917d9c" name="Default Changelist" comment="some fixes and add epoch count" />
+    <list default="true" id="20985a6c-eb57-4123-975e-55a81d917d9c" name="Default Changelist" comment="some fixes and add epoch count">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$CoordinatorElectionMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$CoordinatorElectionMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$CoordinatorElectionMessageACK.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$CoordinatorElectionMessageACK.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Crashed.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Crashed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Decision.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Decision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$DecisionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$DecisionResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$JoinGroupMsg.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$JoinGroupMsg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$ReadRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$ReadRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$ReceivingHeartbeat.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$ReceivingHeartbeat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$SynchronizationMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$SynchronizationMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Timeout.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Timeout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Vote.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$Vote.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$VoteRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$VoteRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$VoteResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$VoteResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$WriteRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica$WriteRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/it/unitn/ds1/Replica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Replica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Replica.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,16 +63,19 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.QuorumBasedTotalOrderBroadcast">
     <configuration name="QuorumBasedTotalOrderBroadcast" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="it.unitn.ds1.QuorumBasedTotalOrderBroadcast" />
-      <module name="quorum_based_total_order_broadcast.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unitn.ds1.*" />
@@ -56,9 +86,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="quorum-based-total-order-broadcast" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.QuorumBasedTotalOrderBroadcast" />
+        <item itemvalue="Gradle.quorum-based-total-order-broadcast" />
       </list>
     </recent_temporary>
   </component>
@@ -89,6 +150,7 @@
       <workItem from="1606923910154" duration="3814000" />
       <workItem from="1606948346888" duration="4867000" />
       <workItem from="1608035550520" duration="5623000" />
+      <workItem from="1614688067518" duration="5445000" />
     </task>
     <servers />
   </component>
@@ -152,79 +214,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="786" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605810873906">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="786" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605810873906" />
-    <state x="679" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1605872528360">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="679" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1605872528360" />
-    <state width="1877" height="759" key="GridCell.Tab.0.bottom" timestamp="1606957967670">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="759" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606957967670" />
-    <state width="1877" height="759" key="GridCell.Tab.0.center" timestamp="1606957967670">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="759" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606957967670" />
-    <state width="1877" height="759" key="GridCell.Tab.0.left" timestamp="1606957967670">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="759" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606957967670" />
-    <state width="1877" height="759" key="GridCell.Tab.0.right" timestamp="1606957967670">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="759" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606957967670" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1601976257828">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601976257828" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1601976257828">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601976257828" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1601976257828">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601976257828" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1601976257828">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601976257828" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1606229619581">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1606229619581" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602324548152">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602324548152" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606957249979">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606957249979" />
-    <state x="512" y="249" width="895" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601975457132">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="512" y="249" width="895" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1601975457132" />
-    <state width="600" height="428" key="javadoc.popup" timestamp="1606263966200">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="600" height="428" key="javadoc.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606263966200" />
-    <state x="755" y="267" key="refactoring.ChangeSignatureDialog" timestamp="1606956469758">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="755" y="267" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606956469758" />
-    <state x="136" y="244" key="run.anything.popup" timestamp="1605965044440">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="136" y="244" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605965044440" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605872738051">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605872738051" />
   </component>
 </project>
