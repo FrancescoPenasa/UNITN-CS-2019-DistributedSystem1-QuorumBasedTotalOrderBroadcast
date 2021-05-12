@@ -1,0 +1,834 @@
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : sends new heartbeat
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:17 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 4
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client2
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : receives write req from $e
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : multicast sent to $b
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : multicast sent to $c
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $a
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote req from $a
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : multicast sent to $d
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : sends its vote response to coordinator 
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $a
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : multicast sent to $e
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : VOTE timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : DECISION timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : receives vote response from $b
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $a
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : receives vote response from $c
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : receives vote response from $d
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : multicast sent to $c
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : is crashed
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : checks quorum
+mag 12, 2021 5:10:19 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : update 0:1 15
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 2
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client1
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:20 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 15
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 4
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client0
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : timeout on decision response, coordinator crashed
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : timeout on decision response, coordinator crashed
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : timeout on decision response, coordinator crashed
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receive coordinator election message from replica: 1
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : election in progress
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : election in progress
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receive coordinator election message from replica: 2
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : message to: $c acknowledged
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : message to: $d acknowledged
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receive coordinator election message from replica: 3
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receive coordinator election message from replica: 4
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receive coordinator election message from replica: 1
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : message to: $e acknowledged
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : message to: $b acknowledged
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : is elected as new coordinator
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : replicas indexes without last update: [1, 3, 4]
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sets new coordinator as: $c
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 0:1 15
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sets new coordinator as: $c
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sets new coordinator as: $c
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 0:1 15
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 0:1 15
+mag 12, 2021 5:10:21 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 0
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 3
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives read req from client0
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 15
+mag 12, 2021 5:10:22 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 1
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client1
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $b
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:1 13
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:1 13
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:23 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:1 13
+mag 12, 2021 5:10:24 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 0
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 4
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client1
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 13
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 2
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from client0
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:2 13
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:2 13
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:25 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:2 13
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 0
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 0
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 2
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from client1
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:3 30
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:3 30
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:3 30
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:28 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 0
+mag 12, 2021 5:10:29 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 4
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client1
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 30
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:30 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 0
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 4
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client0
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:4 41
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:4 41
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:4 41
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 4
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client1
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:5 14
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:5 14
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:5 14
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:33 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 2
+mag 12, 2021 5:10:33 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client0
+mag 12, 2021 5:10:33 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:33 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 14
+mag 12, 2021 5:10:34 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 0
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 1
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client2
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $b
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:6 44
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:6 44
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:6 44
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 0
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:35 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:36 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 4
+mag 12, 2021 5:10:36 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 1
+mag 12, 2021 5:10:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client0
+mag 12, 2021 5:10:36 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives read req from client1
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica onReadRequest
+INFORMAZIONI: bella
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 44
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 44
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 3
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives write req from client0
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends write req to coordinator
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $d
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:7 30
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:7 30
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:38 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:7 30
+mag 12, 2021 5:10:39 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 0
+mag 12, 2021 5:10:39 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 3
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives write req from client0
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends write req to coordinator
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from $d
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives vote req from $c
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends its vote response to coordinator 
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : VOTE timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : DECISION timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives vote req from $c
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends its vote response to coordinator 
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : VOTE timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : DECISION timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : VOTE timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $b
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $d
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives vote req from $c
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends its vote response to coordinator 
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : VOTE timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives vote response from $e
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : checks quorum
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $a
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $b
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $d
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : multicast sent to $e
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : update 1:8 4
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : update 1:8 4
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : DECISION timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : update 1:8 4
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 12, 2021 5:10:40 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts

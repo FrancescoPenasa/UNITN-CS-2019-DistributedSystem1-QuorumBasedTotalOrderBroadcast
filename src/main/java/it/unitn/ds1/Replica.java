@@ -10,6 +10,8 @@ import scala.concurrent.duration.Duration;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 Replica can answer a read from a client, and propose and update to the coordinator
@@ -20,6 +22,8 @@ Coordinator is determined by the value "coordinator", and it can receive a propo
  */
 
 class Replica extends AbstractActor {
+	
+	Logger logger;
     // === debug and crash === //
     static boolean DEBUG = true;
     static boolean REPLICA2_CRASH_ON_VOTE = false;
@@ -78,12 +82,13 @@ class Replica extends AbstractActor {
 
 
     // === Constructor === //
-    public Replica(int id, int coordinator) {
+    public Replica(int id, int coordinator, Logger logger) {
         this.id = id;
         Replica.coordinator = coordinator;
+        this.logger= logger;
     }
-    static public Props props(int id, int coordinator) {
-        return Props.create(Replica.class, () -> new Replica(id, coordinator));
+    static public Props props(int id, int coordinator, Logger logger) {
+        return Props.create(Replica.class, () -> new Replica(id, coordinator, logger));
     }
     // ==================== //
 
@@ -106,7 +111,7 @@ class Replica extends AbstractActor {
     private void onJoinGroupMsg(JoinGroupMsg msg) {
         this.replicas = msg.replicas;
         coordinator = msg.coordinator;
-        print("joins in a group of " + this.replicas.size() + " peers");
+        logger.info("joins in a group of " + this.replicas.size() + " peers");
         // start coordinator heartbeat
         if (isCoordinator()) {
             sendBeat();
@@ -132,7 +137,7 @@ class Replica extends AbstractActor {
             if (this.ttl-- == 0) { // crash after ttl reads and stop send
                 if (heartbeatTimer != null) {
                     heartbeatTimer.cancel();
-                    print("heartbeat cancelled " + heartbeatTimer.isCancelled());
+                    logger.info("heartbeat cancelled " + heartbeatTimer.isCancelled());
                     crash();
                     return;
                 }
@@ -158,6 +163,7 @@ class Replica extends AbstractActor {
                 getSelf()
         );
         print("receives read req from " + getSender().path().name());
+        logger.info("bella");
     }
     // ------------------- //
 
@@ -769,7 +775,7 @@ class Replica extends AbstractActor {
     }
 
     private void print(String s) {
-        System.out.format("Replica %2d: %s\n", id, s);
+        logger.info("Replica "+this.id+" : "+ s);
     }
 
     public boolean hasDecided() {
