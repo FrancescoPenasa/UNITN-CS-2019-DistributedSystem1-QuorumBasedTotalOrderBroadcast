@@ -25,10 +25,9 @@ public class Client extends AbstractActor{
 
 	final static int DELAY = 100;  // delay in msg communication
 
-	// === variables === //
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
-	// ================= //
+
 
 	// === build client actor === //
 	public Client(int id, List<ActorRef> replicas) {

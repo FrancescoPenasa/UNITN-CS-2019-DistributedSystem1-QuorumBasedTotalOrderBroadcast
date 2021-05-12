@@ -12,19 +12,45 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /*
+Client requests.
+    The client can issue read and write requests to any replica.
+    Both types of request contain the ActorRef of the client.  The write request also contains the new proposed value v*.
+    For read operations, the replica will reply immediately with its local value.
+    For write operations, instead, the request will be forwarded to the coordinator.
+ */
+
+/*
+Update protocol.
+    To perform the update request, the coordinator initiates the protocol by broadcasting to all replicas the UPDATE
+    message with the new value. Then, it waits for  their ACKs until a quorum Q of replicas is reached.
+    In this implementation,|Q|=bN/2c+ 1, i.e., a majority of nodes.  Once enough ACKs are collected,
+    the coordinator broadcasts the WRITEOK message.
+    Each UPDATE is identified by a pair〈e, i〉, whereeis the current epoch andi is a sequence number.
+    The epoch is monotonically increasing;  a change of epoch corresponds to a change of coordinator.
+    The sequence number resets to 0 for every new epoch, but identifies uniquely each UPDATE in an epoch.
+    Upon a WRITEOK,replicas apply the update and change their local variable.
+    They also keep the history of updates to ensure none of them is lost in the case of a coordinator crash (see “Coordinator election”).
+ */
+
+/*
 Replica can answer a read from a client, and propose and update to the coordinator
 Coordinator is determined by the value "coordinator", and it can receive a propose from a replica.
-// todo add heartbeat
-// todo add election
+// TODO To emulate network propagation delays, you are requested to insert small random intervals between theunicast transmissions, as done in the examples seen in class
+// TODO the program should generate a log file (or multiple log files) recording the key steps of the protocol.  Inaddition to arbitrary logging, the program must record the following log messages:
+// TODO check timeouts
+// TODO During the evaluation it should be easy, with a simple instrumentation of the code, to emulate a crash
+    at key points of the protocol, e.g., during the sending of an update, after receiving an update,
+    during the sending of WRITEOKs, during the election
 
  */
 
 class Replica extends AbstractActor {
     // === debug and crash === //
-    static boolean DEBUG = true;
-    static boolean REPLICA2_CRASH_ON_VOTE = false;
-    static boolean COORDINATOR_CRASH_ON_HB = false;
-    static boolean COORDINATOR_CRASH_ON_DECISION = true;
+    static boolean DEBUG = false;
+    static boolean CRASH_ON_UPDATE_SEND = false; // TODO CHANGE
+    static boolean CRASH_ON_UPDATE_RECEIVED = false; // TODO CHANGE
+    static boolean CRASH_ON_WRITEOKS_SEND = false; // TODO CHANGE
+    static boolean CRASH_ON_ELECTION = false; // TODO CHANGE
     Cancellable heartbeatTimer = null;
     int ttl = 2; // turns before crash
 	// ======================== //
@@ -64,7 +90,7 @@ class Replica extends AbstractActor {
     public Decision decision = null;
     private final List<ActorRef> yesVoters = new ArrayList<>();
 
-    //Election
+    // Election
     private boolean electionMessageReceived = false;
     public static boolean electionStarted = false;
     public boolean messageACK = false;
@@ -128,26 +154,9 @@ class Replica extends AbstractActor {
     }
 
     private void onReadRequest(ReadRequest req) {
-        if (DEBUG && COORDINATOR_CRASH_ON_HB && isCoordinator()) {
-            if (this.ttl-- == 0) { // crash after ttl reads and stop send
-                if (heartbeatTimer != null) {
-                    heartbeatTimer.cancel();
-                    print("heartbeat cancelled " + heartbeatTimer.isCancelled());
-                    crash();
-                    return;
-                }
-            }
-        }
-        if (DEBUG && REPLICA2_CRASH_ON_VOTE && this.id == 2) {
-            if (this.ttl-- == 0) {
-                crash();
-                return;
-            }
-        }
         if (crashed) {
             return;
         }
-
 
         // send back the value to the client
         getContext().system().scheduler().scheduleOnce(
@@ -164,8 +173,9 @@ class Replica extends AbstractActor {
     // === WriteRequest === //
 	/*
 	WriteRequest manage update request from the client,
-	if the receiving replica is the coordinator update all the other replicas
-	if the receiving replica is not the coordinator send the update req to the coordinator
+	if the receiving replica is the coordinator send UPDATE message with the new value to all other replicas
+	if the receiving replica is not the coordinator send the UPDATE request to the coordinator
+	(part of the update protocol)
 	 */
     public static class WriteRequest implements Serializable {
         public final int value;
@@ -176,15 +186,12 @@ class Replica extends AbstractActor {
     }
 
     private void onWriteRequest(WriteRequest req) {
-
         if (crashed) {
             return;
         }
 
         if (isCoordinator()) {
-            while (deciding) {
-
-            } // lock while updating with a previous value
+            while (deciding) {} // lock while updating with a previous value
 
             // update sequence number
             deciding = true;
@@ -266,7 +273,7 @@ class Replica extends AbstractActor {
         } else {
             this.candidate = req.v;
             print("receives vote req from " + getSender().path().name());
-            print("sends its vote response to coordinator ");
+            print("sends its vote response to coordinator");
             replicas.get(coordinator).tell(new VoteResponse(Vote.YES), getSelf());
             setTimeout(Timeout.VOTE);
             setTimeout(Timeout.DECISION);
@@ -303,9 +310,8 @@ class Replica extends AbstractActor {
         if (v == Vote.YES) {
             yesVoters.add(getSender());
 
-            // crash
-            if (DEBUG && COORDINATOR_CRASH_ON_DECISION && quorumReachedYes()) {
-
+            // coordinator crashed and updated replica fill up the replicas without update
+            if (DEBUG && CRASH_ON_ELECTION && quorumReachedYes()) {
                 fixDecision(Decision.COMMIT);
                 List<ActorRef> someVoters = yesVoters;
                 someVoters.remove(0);
@@ -555,7 +561,7 @@ class Replica extends AbstractActor {
             nextReplica.tell(msg, getSelf());
         }
 
-        //ACKnowledge the message
+        //ACKnowle  dge the message
         getSender().tell(new CoordinatorElectionMessageACK(), getSelf());
 
     }
@@ -583,7 +589,7 @@ class Replica extends AbstractActor {
     private void onSynchronizationMessage(SynchronizationMessage msg) {
         electionMessageReceived = false;
         electionStarted = false;
-        COORDINATOR_CRASH_ON_DECISION = false;
+        CRASH_ON_ELECTION = false;
 
         print("sets new coordinator as: " + getSender().path().name());
 
