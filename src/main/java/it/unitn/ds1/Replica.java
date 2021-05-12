@@ -10,6 +10,8 @@ import scala.concurrent.duration.Duration;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 Client requests.
@@ -45,6 +47,8 @@ Coordinator is determined by the value "coordinator", and it can receive a propo
  */
 
 class Replica extends AbstractActor {
+	
+	Logger logger;
     // === debug and crash === //
     static boolean DEBUG = false;
     static boolean CRASH_ON_UPDATE_SEND = false; // TODO CHANGE
@@ -104,12 +108,13 @@ class Replica extends AbstractActor {
 
 
     // === Constructor === //
-    public Replica(int id, int coordinator) {
+    public Replica(int id, int coordinator, Logger logger) {
         this.id = id;
         Replica.coordinator = coordinator;
+        this.logger= logger;
     }
-    static public Props props(int id, int coordinator) {
-        return Props.create(Replica.class, () -> new Replica(id, coordinator));
+    static public Props props(int id, int coordinator, Logger logger) {
+        return Props.create(Replica.class, () -> new Replica(id, coordinator, logger));
     }
     // ==================== //
 
@@ -132,7 +137,7 @@ class Replica extends AbstractActor {
     private void onJoinGroupMsg(JoinGroupMsg msg) {
         this.replicas = msg.replicas;
         coordinator = msg.coordinator;
-        print("joins in a group of " + this.replicas.size() + " peers");
+        logger.info("joins in a group of " + this.replicas.size() + " peers");
         // start coordinator heartbeat
         if (isCoordinator()) {
             sendBeat();
@@ -167,6 +172,7 @@ class Replica extends AbstractActor {
                 getSelf()
         );
         print("receives read req from " + getSender().path().name());
+        logger.info("bella");
     }
     // ------------------- //
 
@@ -775,7 +781,7 @@ class Replica extends AbstractActor {
     }
 
     private void print(String s) {
-        System.out.format("Replica %2d: %s\n", id, s);
+        logger.info("Replica "+this.id+" : "+ s);
     }
 
     public boolean hasDecided() {

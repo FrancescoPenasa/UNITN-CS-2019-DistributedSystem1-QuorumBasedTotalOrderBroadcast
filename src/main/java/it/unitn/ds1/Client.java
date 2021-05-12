@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
@@ -24,18 +25,25 @@ to the coordinator.
 public class Client extends AbstractActor{
 
 	final static int DELAY = 100;  // delay in msg communication
+<<<<<<< HEAD
 
+=======
+	
+	Logger logger;
+	// === variables === //
+>>>>>>> 93b2163eb876f8689e97c3bb37427748b361aa20
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
 
 
 	// === build client actor === //
-	public Client(int id, List<ActorRef> replicas) {
+	public Client(int id, List<ActorRef> replicas, Logger logger) {
 		this.id = id;
 		this.replicas = replicas;
+		this.logger = logger;
 	}
-	static public Props props(int id, List<ActorRef> replicas) {
-		return Props.create(Client.class, () -> new Client(id, replicas));
+	static public Props props(int id, List<ActorRef> replicas, Logger logger) {
+		return Props.create(Client.class, () -> new Client(id, replicas, logger));
 	}
 	// ========================== //
 
@@ -158,6 +166,6 @@ public class Client extends AbstractActor{
 	}
 
 	void print(String s) {
-		System.out.format("Client%2d: %s\n", id, s);
+		logger.info("Client "+this.id+": "+ s);
 	}
 }
