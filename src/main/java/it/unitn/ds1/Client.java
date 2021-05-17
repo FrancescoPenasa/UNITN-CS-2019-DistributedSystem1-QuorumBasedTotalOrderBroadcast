@@ -23,15 +23,10 @@ to the coordinator.
 
  */
 public class Client extends AbstractActor{
-
-	final static int DELAY = 100;  // delay in msg communication
-<<<<<<< HEAD
-
-=======
-	
 	Logger logger;
+	final static int DELAY = 100;  // delay in msg communication
+
 	// === variables === //
->>>>>>> 93b2163eb876f8689e97c3bb37427748b361aa20
 	private final int id;
 	protected List<ActorRef> replicas; // the list of replicas
 

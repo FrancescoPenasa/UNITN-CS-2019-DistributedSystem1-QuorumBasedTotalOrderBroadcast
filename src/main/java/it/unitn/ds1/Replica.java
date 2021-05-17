@@ -6,11 +6,11 @@ import akka.actor.Cancellable;
 import akka.actor.Props;
 import javafx.util.Pair;
 import scala.concurrent.duration.Duration;
+import scala.util.Random;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
@@ -37,9 +37,6 @@ Update protocol.
 /*
 Replica can answer a read from a client, and propose and update to the coordinator
 Coordinator is determined by the value "coordinator", and it can receive a propose from a replica.
-// TODO To emulate network propagation delays, you are requested to insert small random intervals between theunicast transmissions, as done in the examples seen in class
-// TODO the program should generate a log file (or multiple log files) recording the key steps of the protocol.  Inaddition to arbitrary logging, the program must record the following log messages:
-// TODO check timeouts
 // TODO During the evaluation it should be easy, with a simple instrumentation of the code, to emulate a crash
     at key points of the protocol, e.g., during the sending of an update, after receiving an update,
     during the sending of WRITEOKs, during the election
@@ -60,15 +57,14 @@ class Replica extends AbstractActor {
 	// ======================== //
 
     // timeouts
-    final static int VOTE_TIMEOUT = 1000;      // timeout for the votes, ms
-    final static int DECISION_TIMEOUT = 2000;  // timeout for the decision, ms
-    final static int HEARTBEAT_TIMEOUT = 10000;  // timeout for the heartbeat, ms
-    final static int ELECTION_TIMEOUT = 2000; // timeout for the election message, ms
+    final static int TIMEOUT_VOTE = 1000;
+    final static int TIMEOUT_DECISION = 1500;
+    final static int TIMEOUT_HEARTBEAT = 20000;
+    final static int TIMEOUT_ELECTION = 2000;
     public enum Timeout {HEARTBEAT, DECISION, VOTE, ELECTION}
 
-    // delays
-    final static int DELAY = 100;  // delay in msg communication
-    final static int HEARTBEAT = 2500;  // delay in heartbeats
+    // Heartbeat
+    final static int HEARTBEAT = 5000;  // delay in heartbeats
     long lastHeartbeat = -1;
 
     // replica content
@@ -165,14 +161,13 @@ class Replica extends AbstractActor {
 
         // send back the value to the client
         getContext().system().scheduler().scheduleOnce(
-                Duration.create(DELAY, TimeUnit.MILLISECONDS),
+                Duration.create(getMsgDelay(), TimeUnit.MILLISECONDS),
                 getSender(),
                 new Client.ReadResponse(v),
                 getContext().system().dispatcher(),
                 getSelf()
         );
         print("receives read req from " + getSender().path().name());
-        logger.info("bella");
     }
     // ------------------- //
 
@@ -316,8 +311,12 @@ class Replica extends AbstractActor {
         if (v == Vote.YES) {
             yesVoters.add(getSender());
 
-            // coordinator crashed and updated replica fill up the replicas without update
-            if (DEBUG && CRASH_ON_ELECTION && quorumReachedYes()) {
+            // coordinator crashes and updated replica fill up the replicas without update
+            if (DEBUG && CRASH_ON_WRITEOKS_SEND && quorumReachedYes()) {
+                // todo check
+                //if (isCoordinator()){
+                //    crash();
+                //}
                 fixDecision(Decision.COMMIT);
                 List<ActorRef> someVoters = yesVoters;
                 someVoters.remove(0);
@@ -673,6 +672,10 @@ class Replica extends AbstractActor {
 
 
     // === Methods === //
+    private int getMsgDelay(){
+        Random r = new Random();
+        return 5 + r.nextInt(95);
+    }
     private void multicast(Serializable m) {
         for (ActorRef p : replicas) {
             if (p.equals(getSelf())) { // so the coordinator will not send it to himself
@@ -697,7 +700,7 @@ class Replica extends AbstractActor {
         if (isCoordinator()) {
             return false;
         } else {
-            return (HEARTBEAT_TIMEOUT <= (System.currentTimeMillis() - lastHeartbeat));
+            return (TIMEOUT_HEARTBEAT <= (System.currentTimeMillis() - lastHeartbeat));
         }
     }
 
@@ -730,14 +733,14 @@ class Replica extends AbstractActor {
         print(t.toString() + " timeout starts");
         if (t.equals(Timeout.HEARTBEAT)) {
             getContext().system().scheduler().scheduleOnce(
-                    Duration.create(HEARTBEAT_TIMEOUT, TimeUnit.MILLISECONDS),
+                    Duration.create(TIMEOUT_HEARTBEAT, TimeUnit.MILLISECONDS),
                     getSelf(),
                     new HeartbeatTimeout(),
                     getContext().system().dispatcher(), getSelf()
             );
         } else if (t.equals(Timeout.VOTE)) {
             getContext().system().scheduler().scheduleOnce(
-                    Duration.create(VOTE_TIMEOUT, TimeUnit.MILLISECONDS),
+                    Duration.create(TIMEOUT_VOTE, TimeUnit.MILLISECONDS),
                     getSelf(),
                     new VoteTimeout(),
                     getContext().system().dispatcher(), getSelf()
@@ -745,7 +748,7 @@ class Replica extends AbstractActor {
             return;
         } else if (t.equals(Timeout.DECISION)) {
             getContext().system().scheduler().scheduleOnce(
-                    Duration.create(DECISION_TIMEOUT, TimeUnit.MILLISECONDS),
+                    Duration.create(TIMEOUT_DECISION, TimeUnit.MILLISECONDS),
                     getSelf(),
                     new DecisionTimeout(),
                     getContext().system().dispatcher(), getSelf()
@@ -753,7 +756,7 @@ class Replica extends AbstractActor {
             return;
         } else if (t.equals(Timeout.VOTE)) {
             getContext().system().scheduler().scheduleOnce(
-                    Duration.create(ELECTION_TIMEOUT, TimeUnit.MILLISECONDS),
+                    Duration.create(TIMEOUT_ELECTION, TimeUnit.MILLISECONDS),
                     getSelf(),
                     new ElectionTimeout(),
                     getContext().system().dispatcher(), getSelf()
