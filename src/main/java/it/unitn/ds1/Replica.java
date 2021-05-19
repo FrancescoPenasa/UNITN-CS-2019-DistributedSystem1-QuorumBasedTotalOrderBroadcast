@@ -37,9 +37,7 @@ Update protocol.
 /*
 Replica can answer a read from a client, and propose and update to the coordinator
 Coordinator is determined by the value "coordinator", and it can receive a propose from a replica.
-// TODO During the evaluation it should be easy, with a simple instrumentation of the code, to emulate a crash
-    at key points of the protocol, e.g., during the sending of an update, after receiving an update,
-    during the sending of WRITEOKs, during the election
+
 
  */
 
@@ -47,18 +45,19 @@ class Replica extends AbstractActor {
 	
 	Logger logger;
     // === debug and crash === //
-    static boolean DEBUG = false;
-    static boolean CRASH_ON_UPDATE_SEND = false; // TODO CHANGE
-    static boolean CRASH_ON_UPDATE_RECEIVED = false; // TODO CHANGE
-    static boolean CRASH_ON_WRITEOKS_SEND = false; // TODO CHANGE
-    static boolean CRASH_ON_ELECTION = false; // TODO CHANGE
-    Cancellable heartbeatTimer = null;
-    int ttl = 2; // turns before crash
+    static boolean DEBUG = true;
+    static boolean CRASH_ON_UPDATE_SEND = false;
+    static boolean CRASH_ON_UPDATE_RECEIVED = true;
+    static boolean CRASH_ON_WRITEOKS_SEND = false;
+    static boolean CRASH_ON_ELECTION = true;
+    List<Cancellable> heartbeatTimers = new LinkedList<>();
+    int ttl = 0; // turns before crash //todo add ttl ai crash
+
 	// ======================== //
 
     // timeouts
-    final static int TIMEOUT_VOTE = 1000;
-    final static int TIMEOUT_DECISION = 1500;
+    final static int TIMEOUT_VOTE = 1500;
+    final static int TIMEOUT_DECISION = 1000;
     final static int TIMEOUT_HEARTBEAT = 20000;
     final static int TIMEOUT_ELECTION = 2000;
     public enum Timeout {HEARTBEAT, DECISION, VOTE, ELECTION}
@@ -194,6 +193,11 @@ class Replica extends AbstractActor {
         if (isCoordinator()) {
             while (deciding) {} // lock while updating with a previous value
 
+            if (DEBUG && CRASH_ON_UPDATE_RECEIVED){
+                crash();
+                return;
+            }
+
             // update sequence number
             deciding = true;
             updateTransactionID();
@@ -204,6 +208,16 @@ class Replica extends AbstractActor {
             // start voteRequest for the new value
             this.candidate = req.value;
             multicast(new VoteRequest(req.value));
+
+            if (DEBUG && CRASH_ON_UPDATE_SEND){
+                if(ttl == 0) {
+                    crash();
+                    return;
+                } else {
+                    ttl--;
+                }
+            }
+
             setTimeout(Timeout.VOTE);
 
         } else {
@@ -312,15 +326,12 @@ class Replica extends AbstractActor {
             yesVoters.add(getSender());
 
             // coordinator crashes and updated replica fill up the replicas without update
+            // crasha mentre manda il decision response ad alcuni dei yesvoters. detti anche somevoters
             if (DEBUG && CRASH_ON_WRITEOKS_SEND && quorumReachedYes()) {
-                // todo check
-                //if (isCoordinator()){
-                //    crash();
-                //}
                 fixDecision(Decision.COMMIT);
                 List<ActorRef> someVoters = yesVoters;
                 someVoters.remove(0);
-                someVoters.remove(1);
+                print("DEBUG send decision response to" + someVoters.toString());
                 multicast(new DecisionResponse(decision, this.candidate, this.timeStamp), someVoters);
                 crash();
             }
@@ -448,7 +459,7 @@ class Replica extends AbstractActor {
                 print("election in progress");
             }
 
-            setTimeout(Timeout.HEARTBEAT);
+            //setTimeout(Timeout.HEARTBEAT);
         }
     }
 
@@ -461,7 +472,7 @@ class Replica extends AbstractActor {
         }
     }
 
-    //da rivedere
+    //todo da rivedere
     public void onElectionTimeout(ElectionTimeout msg) {
         print("ack message not received, send election message to another replica");
         if (electionStarted) {
@@ -471,7 +482,6 @@ class Replica extends AbstractActor {
             }
             ActorRef nextReplica = replicas.get(index);
             nextReplica.tell(msg, getSelf());
-
         }
     }
 
@@ -497,7 +507,20 @@ class Replica extends AbstractActor {
 
     private void onCoordinatorElectionMessage(CoordinatorElectionMessage msg) {
         print("receive coordinator election message from replica: " + msg.idReplica);
-
+        if (DEBUG && CRASH_ON_ELECTION){
+            print("crashed during election: " + getID());
+            /*
+            if (ttl == 0){
+                crash();
+            } else {
+                ttl--;
+            }
+            */
+            if ( getID() == 2){
+                crash();
+                return;
+            }
+        }
         if (electionMessageReceived) {
             //check If I can be the new coordinator else forward message
             int maxSqNb = 0;
@@ -545,10 +568,12 @@ class Replica extends AbstractActor {
                 print("replicas indexes without last update: " + indexesOfReplicaWithoutUpdate.toString());
 
                 sendSync(id, this.v);
+                sendBeat();
                 updateEpoch();
                 return;
             }
         }
+
 
 
         ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf()));
@@ -594,7 +619,7 @@ class Replica extends AbstractActor {
     private void onSynchronizationMessage(SynchronizationMessage msg) {
         electionMessageReceived = false;
         electionStarted = false;
-        CRASH_ON_ELECTION = false;
+        //CRASH_ON_ELECTION = false;
 
         print("sets new coordinator as: " + getSender().path().name());
 
@@ -619,7 +644,7 @@ class Replica extends AbstractActor {
         ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf()));
         electionMessageReceived = true;
         nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
-        setTimeout(Timeout.ELECTION);
+
     }
 
     void sendSync(int id, int value) {
@@ -655,8 +680,17 @@ class Replica extends AbstractActor {
     }
 
     public void crash() {
+        if (isCoordinator()) {
+            for(Cancellable t : heartbeatTimers) {
+                t.cancel();
+            }
+        }
         getContext().become(crashed());
         print("is crashed");
+
+        CRASH_ON_UPDATE_SEND = false;
+        CRASH_ON_UPDATE_RECEIVED = false;
+        CRASH_ON_WRITEOKS_SEND = false;
     }
 
     public Receive crashed() {
@@ -705,17 +739,18 @@ class Replica extends AbstractActor {
     }
 
     private void sendBeat() {
-        print("sends new heartbeat");
+        print("sends first heartbeat");
         for (ActorRef p : replicas) {
             if (p.equals(getSelf())) { // so the coordinator will not send it to himself
             } else {
-                heartbeatTimer = getContext().system().scheduler().scheduleWithFixedDelay(
+                Cancellable timer = getContext().system().scheduler().scheduleWithFixedDelay(
                         Duration.create(HEARTBEAT, TimeUnit.MILLISECONDS),               // when to start generating messages
                         Duration.create(HEARTBEAT, TimeUnit.MILLISECONDS),               // how frequently generate them
                         p,                                // dst
                         new ReceivingHeartbeat(), // the message to send
                         getContext().system().dispatcher(),                 // system dispatcher
                         getSelf());
+                heartbeatTimers.add(timer);
             }
         }
     }
@@ -724,7 +759,7 @@ class Replica extends AbstractActor {
     private void updateReplicas(Serializable m) {
         print("updating replicas");
         for (ActorRef p : replicas) {
-            print("multicast sent to " + p);
+            print("multicast sent to " + p.path().name());
             p.tell(m, getSelf());
         }
     }
@@ -754,7 +789,7 @@ class Replica extends AbstractActor {
                     getContext().system().dispatcher(), getSelf()
             );
             return;
-        } else if (t.equals(Timeout.VOTE)) {
+        } else if (t.equals(Timeout.ELECTION)) {
             getContext().system().scheduler().scheduleOnce(
                     Duration.create(TIMEOUT_ELECTION, TimeUnit.MILLISECONDS),
                     getSelf(),
