@@ -1,160 +1,248 @@
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica onJoinGroupMsg
-INFO: joins in a group of 5 peers
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica onJoinGroupMsg
-INFO: joins in a group of 5 peers
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica onJoinGroupMsg
-INFO: joins in a group of 5 peers
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica onJoinGroupMsg
-INFO: joins in a group of 5 peers
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica onJoinGroupMsg
-INFO: joins in a group of 5 peers
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : HEARTBEAT timeout starts
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : HEARTBEAT timeout starts
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 19, 2021 4:20:32 PM it.unitn.ds1.Replica print
-INFO: Replica 0 : sends first heartbeat
-May 19, 2021 4:20:33 PM it.unitn.ds1.Client print
-INFO: Client 0: read req to 0
-May 19, 2021 4:20:34 PM it.unitn.ds1.Replica print
-INFO: Replica 0 : receives read req from client0
-May 19, 2021 4:20:34 PM it.unitn.ds1.Client print
-INFO: Client 0: read done 0
-May 19, 2021 4:20:34 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 2
-May 19, 2021 4:20:34 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives write req from client1
-May 19, 2021 4:20:34 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : sends write req to coordinator
-May 19, 2021 4:20:34 PM it.unitn.ds1.Replica print
-INFO: Replica 0 : is crashed
-May 19, 2021 4:20:37 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 1
-May 19, 2021 4:20:37 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client2
-May 19, 2021 4:20:37 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 19, 2021 4:20:39 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 1
-May 19, 2021 4:20:39 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client0
-May 19, 2021 4:20:39 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 19, 2021 4:20:41 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 2
-May 19, 2021 4:20:41 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives write req from client2
-May 19, 2021 4:20:41 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : sends write req to coordinator
-May 19, 2021 4:20:44 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 2
-May 19, 2021 4:20:44 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives write req from client1
-May 19, 2021 4:20:44 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : sends write req to coordinator
-May 19, 2021 4:20:45 PM it.unitn.ds1.Client print
-INFO: Client 0: read req to 0
-May 19, 2021 4:20:46 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 2
-May 19, 2021 4:20:46 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives read req from client2
-May 19, 2021 4:20:46 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 19, 2021 4:20:50 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 0
-May 19, 2021 4:20:50 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 4
-May 19, 2021 4:20:50 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives write req from client2
-May 19, 2021 4:20:50 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : sends write req to coordinator
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : heartbeat not received, coordinator crashed
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : heartbeat not received, coordinator crashed
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : heartbeat not received, coordinator crashed
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : heartbeat not received, coordinator crashed
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : election in progress
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : election in progress
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : election in progress
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receive coordinator election message from replica: 2
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : crashed during election: 3
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receive coordinator election message from replica: 3
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : message to: $d acknowledged
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : crashed during election: 4
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receive coordinator election message from replica: 4
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : message to: $e acknowledged
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : crashed during election: 1
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receive coordinator election message from replica: 1
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : message to: $b acknowledged
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : crashed during election: 2
-May 19, 2021 4:20:52 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : is crashed
-May 19, 2021 4:20:53 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 2
-May 19, 2021 4:20:55 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 4
-May 19, 2021 4:20:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives read req from client2
-May 19, 2021 4:20:55 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 19, 2021 4:20:56 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 0
-May 19, 2021 4:20:59 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 1
-May 19, 2021 4:20:59 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client2
-May 19, 2021 4:20:59 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 19, 2021 4:21:01 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 0
-May 19, 2021 4:21:03 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 3
-May 19, 2021 4:21:03 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client1
-May 19, 2021 4:21:03 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 19, 2021 4:21:04 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 1
-May 19, 2021 4:21:04 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client2
-May 19, 2021 4:21:04 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 19, 2021 4:21:07 PM it.unitn.ds1.Client print
-INFO: Client 0: read req to 4
-May 19, 2021 4:21:07 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives read req from client0
-May 19, 2021 4:21:07 PM it.unitn.ds1.Client print
-INFO: Client 0: read done 0
-May 19, 2021 4:21:08 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 2
-May 19, 2021 4:21:12 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 1
-May 19, 2021 4:21:12 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client1
-May 19, 2021 4:21:12 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 19, 2021 4:21:12 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 2
-May 19, 2021 4:21:12 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 2
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFORMAZIONI: joins in a group of 5 peers
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : HEARTBEAT timeout starts
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : HEARTBEAT timeout starts
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : HEARTBEAT timeout starts
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : HEARTBEAT timeout starts
+mag 20, 2021 5:42:16 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : sends first heartbeat
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 2
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client1
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 1
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client0
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 20, 2021 5:42:18 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 0 : is crashed
+mag 20, 2021 5:42:20 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 3
+mag 20, 2021 5:42:20 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives read req from client2
+mag 20, 2021 5:42:20 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:21 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 0
+mag 20, 2021 5:42:22 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 2
+mag 20, 2021 5:42:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from client2
+mag 20, 2021 5:42:22 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : sends write req to coordinator
+mag 20, 2021 5:42:23 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 2
+mag 20, 2021 5:42:24 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client0
+mag 20, 2021 5:42:24 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 0
+mag 20, 2021 5:42:24 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 1
+mag 20, 2021 5:42:24 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives read req from client1
+mag 20, 2021 5:42:24 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:25 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 0
+mag 20, 2021 5:42:27 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 4
+mag 20, 2021 5:42:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client2
+mag 20, 2021 5:42:27 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 20, 2021 5:42:27 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 4
+mag 20, 2021 5:42:28 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client1
+mag 20, 2021 5:42:28 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 20, 2021 5:42:29 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 0
+mag 20, 2021 5:42:29 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 3
+mag 20, 2021 5:42:29 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives write req from client2
+mag 20, 2021 5:42:29 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends write req to coordinator
+mag 20, 2021 5:42:31 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 1
+mag 20, 2021 5:42:31 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client1
+mag 20, 2021 5:42:31 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 20, 2021 5:42:32 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 4
+mag 20, 2021 5:42:32 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client2
+mag 20, 2021 5:42:32 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 4
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client0
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 4
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 1
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client2
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client1
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 20, 2021 5:42:34 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : heartbeat not received, coordinator crashed
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : heartbeat not received, coordinator crashed
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : heartbeat not received, coordinator crashed
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : election in progress
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : heartbeat not received, coordinator crashed
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : election in progress
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : election in progress
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receive coordinator election message from replica: 2
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : crashed during election: 3
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 3
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives read req from client2
+mag 20, 2021 5:42:36 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:37 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 4
+mag 20, 2021 5:42:37 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client1
+mag 20, 2021 5:42:37 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 1
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client2
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 2
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client0
+mag 20, 2021 5:42:39 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 0
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 2
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client1
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 4
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client2
+mag 20, 2021 5:42:41 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:43 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 2
+mag 20, 2021 5:42:43 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives read req from client2
+mag 20, 2021 5:42:43 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:44 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 3
+mag 20, 2021 5:42:44 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives read req from client1
+mag 20, 2021 5:42:44 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:44 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 0
+mag 20, 2021 5:42:46 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 1
+mag 20, 2021 5:42:46 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives read req from client2
+mag 20, 2021 5:42:46 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:47 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 2
+mag 20, 2021 5:42:47 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from client1
+mag 20, 2021 5:42:47 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : sends write req to coordinator
+mag 20, 2021 5:42:48 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 0
+mag 20, 2021 5:42:49 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: write req to 1
+mag 20, 2021 5:42:49 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives write req from client0
+mag 20, 2021 5:42:49 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : sends write req to coordinator
+mag 20, 2021 5:42:50 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 4
+mag 20, 2021 5:42:50 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read req to 1
+mag 20, 2021 5:42:50 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client2
+mag 20, 2021 5:42:50 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives read req from client1
+mag 20, 2021 5:42:50 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:51 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: read done 0
+mag 20, 2021 5:42:53 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 4
+mag 20, 2021 5:42:53 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client2
+mag 20, 2021 5:42:53 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:54 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 3
+mag 20, 2021 5:42:54 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : receives write req from client1
+mag 20, 2021 5:42:54 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 3 : sends write req to coordinator
+mag 20, 2021 5:42:54 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read req to 4
+mag 20, 2021 5:42:55 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives read req from client0
+mag 20, 2021 5:42:55 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 0: read done 0
+mag 20, 2021 5:42:55 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read req to 1
+mag 20, 2021 5:42:55 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 1 : receives read req from client2
+mag 20, 2021 5:42:55 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: read done 0
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 1: write req to 2
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : receives write req from client1
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 2 : sends write req to coordinator
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Client print
+INFORMAZIONI: Client 2: write req to 4
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : receives write req from client2
+mag 20, 2021 5:42:57 PM it.unitn.ds1.Replica print
+INFORMAZIONI: Replica 4 : sends write req to coordinator

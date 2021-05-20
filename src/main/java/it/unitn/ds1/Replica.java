@@ -27,11 +27,11 @@ Update protocol.
     message with the new value. Then, it waits for  their ACKs until a quorum Q of replicas is reached.
     In this implementation,|Q|=bN/2c+ 1, i.e., a majority of nodes.  Once enough ACKs are collected,
     the coordinator broadcasts the WRITEOK message.
-    Each UPDATE is identified by a pair〈e, i〉, whereeis the current epoch andi is a sequence number.
+    Each UPDATE is identified by a pairã€ˆe, iã€‰, whereeis the current epoch andi is a sequence number.
     The epoch is monotonically increasing;  a change of epoch corresponds to a change of coordinator.
     The sequence number resets to 0 for every new epoch, but identifies uniquely each UPDATE in an epoch.
     Upon a WRITEOK,replicas apply the update and change their local variable.
-    They also keep the history of updates to ensure none of them is lost in the case of a coordinator crash (see “Coordinator election”).
+    They also keep the history of updates to ensure none of them is lost in the case of a coordinator crash (see â€œCoordinator electionâ€�).
  */
 
 /*
@@ -97,7 +97,8 @@ class Replica extends AbstractActor {
     public List<Pair<Integer, Pair<Integer, Integer>>> mylastUpdates = new ArrayList<Pair<Integer, Pair<Integer, Integer>>>();
     public CoordinatorElectionMessage msg = null;
     public boolean lastUpdateReceived = true;
-
+    private boolean electionMessageACKReceived = false;
+    static List<ActorRef> activeReplicas;
     //Uniform agreement
     public static List<Integer> indexesOfReplicaWithoutUpdate = new LinkedList<Integer>();
 
@@ -425,7 +426,7 @@ class Replica extends AbstractActor {
             if (!electionStarted) {
                 electionStarted = true;
                 ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf()));
-                indexNextReplica = replicas.indexOf(getSelf());
+                indexNextReplica = replicas.indexOf(getSelf()); 
                 electionMessageReceived = true;
                 nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
             } else {
@@ -475,13 +476,22 @@ class Replica extends AbstractActor {
     //todo da rivedere
     public void onElectionTimeout(ElectionTimeout msg) {
         print("ack message not received, send election message to another replica");
+        if (electionMessageACKReceived) {
+        	return;
+        }
+        
         if (electionStarted) {
+        	/*print("ENTRO QUA DENTRO PORCO DI QUEL DIO");
+        	
             int index = ++indexNextReplica % replicas.size();
             if (index == id) {
                 index = ++index % replicas.size();
-            }
-            ActorRef nextReplica = replicas.get(index);
-            nextReplica.tell(msg, getSelf());
+            }*/
+        	++indexNextReplica;
+        	ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf())+indexNextReplica);
+            //ActorRef nextReplica = replicas.get(index);
+       
+            nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
         }
     }
 
@@ -517,10 +527,17 @@ class Replica extends AbstractActor {
             }
             */
             if ( getID() == 2){
+            	print("sono crashata");
                 crash();
                 return;
             }
         }
+        
+        //aggiungo me stessa alla lista delle repliche attive
+        if(!electionMessageReceived) {
+        	activeReplicas.add(getSelf());
+        }
+        
         if (electionMessageReceived) {
             //check If I can be the new coordinator else forward message
             int maxSqNb = 0;
@@ -574,8 +591,8 @@ class Replica extends AbstractActor {
             }
         }
 
-
-
+        
+        
         ActorRef nextReplica = getNextReplica(replicas.indexOf(getSelf()));
 
         //Update coordinator election message
@@ -587,12 +604,17 @@ class Replica extends AbstractActor {
             nextReplica.tell(msg, getSelf());
             electionMessageReceived = true;
         } else {
+        	
+        	//se sono nel secondo giro guardo nella lista delle repliche attive e invio a quelle
+        	ActorRef nextActiveReplica = getNextReplica(activeReplicas.indexOf(getSelf()));
             msg.idReplica = id;
-            nextReplica.tell(msg, getSelf());
+            nextActiveReplica.tell(msg, getSelf());
         }
 
         //ACKnowle  dge the message
+        setTimeout(Timeout.ELECTION);
         getSender().tell(new CoordinatorElectionMessageACK(), getSelf());
+       
 
     }
 
@@ -603,6 +625,7 @@ class Replica extends AbstractActor {
     }
 
     private void onCoordinatorElectionMessageACK(CoordinatorElectionMessageACK msg) {
+    	electionMessageACKReceived = true;
         print("message to: " + getSender().path().name() + " acknowledged");
     }
 
@@ -832,6 +855,13 @@ class Replica extends AbstractActor {
 
     public int getID() {
         return this.id;
+        
+        
+        
+        
+        
+        
+        
     }
     // ============= //
 
