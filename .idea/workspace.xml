@@ -9,6 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20985a6c-eb57-4123-975e-55a81d917d9c" name="Default Changelist" comment="CODE refactor + small changes, still to complete">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/quorum-based-total-order-broadcast.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quorumBased.log" beforeDir="false" afterPath="$PROJECT_DIR$/quorumBased.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Replica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unitn/ds1/Replica.java" afterDir="false" />
@@ -74,17 +77,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="quorum-based-total-order-broadcast" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -142,6 +134,8 @@
       <workItem from="1616407747426" duration="2595000" />
       <workItem from="1620822604135" duration="5948000" />
       <workItem from="1621419407439" duration="9322000" />
+      <workItem from="1621528255582" duration="4205000" />
+      <workItem from="1621704631759" duration="5155000" />
     </task>
     <task id="LOCAL-00001" summary="CODE refactor + small changes, still to complete">
       <created>1620832547368</created>
