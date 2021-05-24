@@ -72,7 +72,7 @@ class Replica extends AbstractActor {
     protected boolean crashed = false;
 
     // replica ID
-    protected final int id; // replica ID
+    protected int id; // replica ID
     protected static int coordinator; // coordinator ID
     protected List<ActorRef> replicas; // the list of replicas
 
@@ -91,7 +91,7 @@ class Replica extends AbstractActor {
 
     // Election
     private boolean electionMessageReceived = false;
-    private static boolean electionStarted = false;
+    public static boolean electionStarted = false;
     public boolean messageACK = false;
     public Integer indexNextReplica = null;
     public List<Pair<Integer, Pair<Integer, Integer>>> mylastUpdates = new ArrayList<Pair<Integer, Pair<Integer, Integer>>>();
@@ -292,7 +292,7 @@ class Replica extends AbstractActor {
             print("sends its vote response to coordinator");
             replicas.get(coordinator).tell(new VoteResponse(Vote.YES), getSelf());
             setTimeout(Timeout.VOTE);
-            setTimeout(Timeout.DECISION);
+            //setTimeout(Timeout.DECISION);
         }
     }
 
@@ -399,9 +399,11 @@ class Replica extends AbstractActor {
     public void onVoteTimeout(VoteTimeout msg) {
         if (!hasDecided() && isCoordinator()) {
             print("timeout on vote request, replica crashed");
-            List<ActorRef> new_replicas = yesVoters;
-            new_replicas.add(getSelf());
-            multicast(new JoinGroupMsg(new_replicas, getID()), new_replicas);
+            List<ActorRef> new_replicas = null;
+            setID(0);                    // set my ID to 0 because im the coordinator
+            new_replicas.add(getSelf()); // position 0 the coordinator position
+            new_replicas.addAll(yesVoters);
+            multicast(new JoinGroupMsg(new_replicas, 0), new_replicas);
             fixDecision(Decision.ABORT);
             multicast(new DecisionResponse(Decision.ABORT, 0, this.timeStamp));
             setTimeout(Timeout.DECISION);
@@ -586,7 +588,7 @@ class Replica extends AbstractActor {
             electionMessageReceived = true;
         } else {
         	msg.idReplica = id; // serve quest?
-        	this.msg = msg;     // todo remove
+        	this.msg = msg;     // todo remove?
             nextReplica.tell(msg, getSelf());
         }
 
@@ -815,13 +817,9 @@ class Replica extends AbstractActor {
 
     public int getID() {
         return this.id;
-        
-        
-        
-        
-        
-        
-        
+    }
+    private void setID(int id) {
+        this.id = id;
     }
     // ============= //
 

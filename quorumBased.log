@@ -1,408 +1,276 @@
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica onJoinGroupMsg
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica onJoinGroupMsg
 INFO: joins in a group of 5 peers
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica onJoinGroupMsg
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica onJoinGroupMsg
 INFO: joins in a group of 5 peers
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica onJoinGroupMsg
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica onJoinGroupMsg
 INFO: joins in a group of 5 peers
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica onJoinGroupMsg
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica onJoinGroupMsg
 INFO: joins in a group of 5 peers
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica onJoinGroupMsg
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica onJoinGroupMsg
 INFO: joins in a group of 5 peers
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : HEARTBEAT timeout starts
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : HEARTBEAT timeout starts
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica print
 INFO: Replica 0 : sends first heartbeat
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : HEARTBEAT timeout starts
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica print
 INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:57:31 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica print
 INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:57:34 PM it.unitn.ds1.Client print
-INFO: Client 0: read req to 2
-May 22, 2021 8:57:34 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives read req from client0
-May 22, 2021 8:57:34 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:48 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : HEARTBEAT timeout starts
+May 24, 2021 4:19:50 PM it.unitn.ds1.Client print
+INFO: Client 0: read req to 0
+May 24, 2021 4:19:50 PM it.unitn.ds1.Replica print
+INFO: Replica 0 : receives read req from client0
+May 24, 2021 4:19:51 PM it.unitn.ds1.Client print
 INFO: Client 0: read done 0
-May 22, 2021 8:57:35 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 2
-May 22, 2021 8:57:35 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives read req from client2
-May 22, 2021 8:57:35 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 22, 2021 8:57:35 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 0
-May 22, 2021 8:57:35 PM it.unitn.ds1.Replica print
-INFO: Replica 0 : is crashed
-May 22, 2021 8:57:37 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 4
-May 22, 2021 8:57:37 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives write req from client1
-May 22, 2021 8:57:37 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : sends write req to coordinator
-May 22, 2021 8:57:39 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 1
-May 22, 2021 8:57:39 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client2
-May 22, 2021 8:57:39 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:57:40 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 2
-May 22, 2021 8:57:40 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives write req from client1
-May 22, 2021 8:57:40 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : sends write req to coordinator
-May 22, 2021 8:57:41 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 1
-May 22, 2021 8:57:41 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client0
-May 22, 2021 8:57:41 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:57:42 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 4
-May 22, 2021 8:57:42 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives read req from client1
-May 22, 2021 8:57:42 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:57:43 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:52 PM it.unitn.ds1.Client print
 INFO: Client 2: read req to 3
-May 22, 2021 8:57:43 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:52 PM it.unitn.ds1.Replica print
 INFO: Replica 3 : receives read req from client2
-May 22, 2021 8:57:44 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:52 PM it.unitn.ds1.Client print
 INFO: Client 2: read done 0
-May 22, 2021 8:57:44 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 4
-May 22, 2021 8:57:44 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives write req from client1
-May 22, 2021 8:57:44 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : sends write req to coordinator
-May 22, 2021 8:57:46 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Client print
 INFO: Client 1: read req to 4
-May 22, 2021 8:57:46 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Replica print
 INFO: Replica 4 : receives read req from client1
-May 22, 2021 8:57:47 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Client print
 INFO: Client 1: read done 0
-May 22, 2021 8:57:48 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 3
-May 22, 2021 8:57:48 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client2
-May 22, 2021 8:57:48 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:57:48 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 2
-May 22, 2021 8:57:48 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receives write req from client0
-May 22, 2021 8:57:48 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : sends write req to coordinator
-May 22, 2021 8:57:49 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 3
-May 22, 2021 8:57:49 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client1
-May 22, 2021 8:57:49 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:57:51 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : I'm starting the election
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : I'm starting the election
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : I'm starting the election
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receive coordinator election message from replica: 1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receive coordinator election message from replica: 3
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : I'm starting the election
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receive coordinator election message from replica: 4
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : message to: $d acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : receive coordinator election message from replica: 1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : message to: $b acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : crashed during election: 2
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receive coordinator election message from replica: 4
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receive coordinator election message from replica: 3
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 2 : is crashed
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receive coordinator election message from replica: 1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : message to: $e acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receive coordinator election message from replica: 3
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : message to: $b acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : message to: $e acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : ELECTION timeout starts
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receive coordinator election message from replica: 1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : message to: $d acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : is elected as new coordinator
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : message to: $b acknowledged
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : replicas indexes without last update: []
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $a
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $b
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $c
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sets new coordinator as: $e
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $d
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : sends first heartbeat
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sets new coordinator as: $e
-May 22, 2021 8:57:51 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client1
-May 22, 2021 8:57:51 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:57:52 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 0
-May 22, 2021 8:57:53 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 2
-May 22, 2021 8:57:55 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 1
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client0
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives write req from $b
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $a
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $b
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $c
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives vote req from $e
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : multicast sent to $d
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends its vote response to coordinator
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : VOTE timeout starts
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives vote req from $e
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends its vote response to coordinator
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : VOTE timeout starts
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives vote response from $b
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : VOTE timeout starts
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : checks quorum
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : DECISION timeout starts
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : DECISION timeout starts
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : receives vote response from $d
-May 22, 2021 8:57:55 PM it.unitn.ds1.Replica print
-INFO: Replica 4 : checks quorum
-May 22, 2021 8:57:55 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 1
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client1
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : timeout on decision response, coordinator crashed
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : I'm starting the election
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : I'm starting the election
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receive coordinator election message from replica: 3
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receive coordinator election message from replica: 1
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : ELECTION timeout starts
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : ELECTION timeout starts
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : message to: $d acknowledged
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : message to: $b acknowledged
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Replica print
 INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Replica print
 INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:57:56 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 1
-May 22, 2021 8:57:56 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client2
-May 22, 2021 8:57:57 PM it.unitn.ds1.Client print
-INFO: Client 2: read done 0
-May 22, 2021 8:57:58 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:53 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : HEARTBEAT timeout starts
+May 24, 2021 4:19:53 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : HEARTBEAT timeout starts
+May 24, 2021 4:19:58 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : HEARTBEAT timeout starts
+May 24, 2021 4:19:58 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : HEARTBEAT timeout starts
+May 24, 2021 4:19:58 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:19:58 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:19:59 PM it.unitn.ds1.Client print
+INFO: Client 0: write req to 3
+May 24, 2021 4:19:59 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receives write req from client0
+May 24, 2021 4:19:59 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : sends write req to coordinator
+May 24, 2021 4:19:59 PM it.unitn.ds1.Replica print
+INFO: Replica 0 : is crashed
+May 24, 2021 4:19:59 PM it.unitn.ds1.Client print
 INFO: Client 1: read req to 4
-May 22, 2021 8:58:00 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 3
-May 22, 2021 8:58:00 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives read req from client1
-May 22, 2021 8:58:00 PM it.unitn.ds1.Client print
+May 24, 2021 4:19:59 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receives read req from client1
+May 24, 2021 4:19:59 PM it.unitn.ds1.Client print
 INFO: Client 1: read done 0
-May 22, 2021 8:58:01 PM it.unitn.ds1.Client print
-INFO: Client 2: read req to 2
-May 22, 2021 8:58:01 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:01 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:02 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 1
-May 22, 2021 8:58:02 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client0
-May 22, 2021 8:58:02 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:58:02 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 1
-May 22, 2021 8:58:02 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client1
-May 22, 2021 8:58:02 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:58:05 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 1
-May 22, 2021 8:58:05 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client1
-May 22, 2021 8:58:05 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:58:05 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 1
-May 22, 2021 8:58:05 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client2
-May 22, 2021 8:58:05 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:58:06 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:06 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:07 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 1
-May 22, 2021 8:58:07 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client1
-May 22, 2021 8:58:07 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:58:08 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 2
-May 22, 2021 8:58:09 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 1
-May 22, 2021 8:58:09 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client1
-May 22, 2021 8:58:09 PM it.unitn.ds1.Client print
+May 24, 2021 4:20:01 PM it.unitn.ds1.Client print
 INFO: Client 2: write req to 0
-May 22, 2021 8:58:09 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:58:11 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:11 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:11 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 0
-May 22, 2021 8:58:14 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 3
-May 22, 2021 8:58:14 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 2
-May 22, 2021 8:58:14 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client2
-May 22, 2021 8:58:14 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:58:15 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 1
-May 22, 2021 8:58:15 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives write req from client0
-May 22, 2021 8:58:15 PM it.unitn.ds1.Replica print
+May 24, 2021 4:20:05 PM it.unitn.ds1.Client print
+INFO: Client 1: write req to 1
+May 24, 2021 4:20:06 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : receives write req from client1
+May 24, 2021 4:20:06 PM it.unitn.ds1.Replica print
 INFO: Replica 1 : sends write req to coordinator
-May 22, 2021 8:58:16 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 3
-May 22, 2021 8:58:16 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:16 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:16 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client1
-May 22, 2021 8:58:16 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:58:18 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 2
-May 22, 2021 8:58:18 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 3
-May 22, 2021 8:58:18 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client1
-May 22, 2021 8:58:18 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:58:21 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 3
-May 22, 2021 8:58:21 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives read req from client1
-May 22, 2021 8:58:21 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:58:21 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:21 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:22 PM it.unitn.ds1.Client print
-INFO: Client 0: write req to 2
-May 22, 2021 8:58:22 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 4
-May 22, 2021 8:58:23 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 0
-May 22, 2021 8:58:25 PM it.unitn.ds1.Client print
-INFO: Client 1: write req to 0
-May 22, 2021 8:58:26 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : HEARTBEAT timeout starts
-May 22, 2021 8:58:26 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : HEARTBEAT timeout starts
-May 22, 2021 8:58:27 PM it.unitn.ds1.Client print
-INFO: Client 2: write req to 3
-May 22, 2021 8:58:27 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : receives write req from client2
-May 22, 2021 8:58:27 PM it.unitn.ds1.Replica print
-INFO: Replica 3 : sends write req to coordinator
-May 22, 2021 8:58:27 PM it.unitn.ds1.Client print
-INFO: Client 1: read req to 1
-May 22, 2021 8:58:27 PM it.unitn.ds1.Replica print
-INFO: Replica 1 : receives read req from client1
-May 22, 2021 8:58:28 PM it.unitn.ds1.Client print
-INFO: Client 1: read done 0
-May 22, 2021 8:58:29 PM it.unitn.ds1.Client print
+May 24, 2021 4:20:07 PM it.unitn.ds1.Client print
 INFO: Client 0: read req to 2
-May 22, 2021 8:58:30 PM it.unitn.ds1.Client print
+May 24, 2021 4:20:07 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : receives read req from client0
+May 24, 2021 4:20:08 PM it.unitn.ds1.Client print
+INFO: Client 0: read done 0
+May 24, 2021 4:20:10 PM it.unitn.ds1.Client print
+INFO: Client 2: write req to 2
+May 24, 2021 4:20:10 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : receives write req from client2
+May 24, 2021 4:20:10 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : sends write req to coordinator
+May 24, 2021 4:20:12 PM it.unitn.ds1.Client print
 INFO: Client 1: write req to 4
+May 24, 2021 4:20:12 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receives write req from client1
+May 24, 2021 4:20:12 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : sends write req to coordinator
+May 24, 2021 4:20:16 PM it.unitn.ds1.Client print
+INFO: Client 0: read req to 1
+May 24, 2021 4:20:16 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : receives read req from client0
+May 24, 2021 4:20:16 PM it.unitn.ds1.Client print
+INFO: Client 0: read done 0
+May 24, 2021 4:20:18 PM it.unitn.ds1.Client print
+INFO: Client 1: read req to 0
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : timeout on decision response, coordinator crashed
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : timeout on decision response, coordinator crashed
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : timeout on decision response, coordinator crashed
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : I'm starting the election
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : I'm starting the election
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : timeout on decision response, coordinator crashed
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : receive coordinator election message from replica: 2
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receive coordinator election message from replica: 3
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : I'm starting the election
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receive coordinator election message from replica: 3
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : crashed during election: 2
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : receive coordinator election message from replica: 4
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : ELECTION timeout starts
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : ELECTION timeout starts
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : ELECTION timeout starts
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : message to: $d acknowledged
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 2 : is crashed
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : message to: $e acknowledged
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receive coordinator election message from replica: 4
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : is elected as new coordinator
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : replicas indexes without last update: []
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $a
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $b
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $c
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : sets new coordinator as: $e
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $d
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : sends first heartbeat
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : sets new coordinator as: $e
+May 24, 2021 4:20:18 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : message to: $b acknowledged
+May 24, 2021 4:20:19 PM it.unitn.ds1.Client print
+INFO: Client 2: write req to 1
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : receives write req from client2
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : sends write req to coordinator
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receives write req from $b
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $a
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $b
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $c
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : receives vote req from $e
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $d
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : sends its vote response to coordinator
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receives vote req from $e
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : VOTE timeout starts
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : sends its vote response to coordinator
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : VOTE timeout starts
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : VOTE timeout starts
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receives vote response from $b
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : checks quorum
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : receives vote response from $d
+May 24, 2021 4:20:19 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : checks quorum
+May 24, 2021 4:20:20 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : ack message not received, send election message to another replica
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : timeout on vote request, replica crashed
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $b
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $d
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFO: joins in a group of 3 peers
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica onJoinGroupMsg
+INFO: joins in a group of 3 peers
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $a
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $b
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $c
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : multicast sent to $d
+May 24, 2021 4:20:21 PM it.unitn.ds1.Replica print
+INFO: Replica 4 : DECISION timeout starts
+May 24, 2021 4:20:23 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:23 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:24 PM it.unitn.ds1.Client print
+INFO: Client 0: write req to 4
+May 24, 2021 4:20:25 PM it.unitn.ds1.Client print
+INFO: Client 1: read req to 0
+May 24, 2021 4:20:28 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:28 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:29 PM it.unitn.ds1.Client print
+INFO: Client 2: read req to 2
+May 24, 2021 4:20:31 PM it.unitn.ds1.Client print
+INFO: Client 1: read req to 4
+May 24, 2021 4:20:33 PM it.unitn.ds1.Client print
+INFO: Client 0: write req to 0
+May 24, 2021 4:20:33 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:33 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:37 PM it.unitn.ds1.Client print
+INFO: Client 1: read req to 0
+May 24, 2021 4:20:38 PM it.unitn.ds1.Client print
+INFO: Client 2: write req to 3
+May 24, 2021 4:20:38 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receives write req from client2
+May 24, 2021 4:20:38 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : sends write req to coordinator
+May 24, 2021 4:20:38 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:38 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:41 PM it.unitn.ds1.Client print
+INFO: Client 0: read req to 3
+May 24, 2021 4:20:41 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receives read req from client0
+May 24, 2021 4:20:41 PM it.unitn.ds1.Client print
+INFO: Client 0: read done 0
+May 24, 2021 4:20:43 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : HEARTBEAT timeout starts
+May 24, 2021 4:20:43 PM it.unitn.ds1.Replica print
+INFO: Replica 1 : HEARTBEAT timeout starts
+May 24, 2021 4:20:44 PM it.unitn.ds1.Client print
+INFO: Client 1: read req to 3
+May 24, 2021 4:20:44 PM it.unitn.ds1.Replica print
+INFO: Replica 3 : receives read req from client1
+May 24, 2021 4:20:44 PM it.unitn.ds1.Client print
+INFO: Client 1: read done 0
+May 24, 2021 4:20:47 PM it.unitn.ds1.Client print
+INFO: Client 2: read req to 2
