@@ -88,6 +88,7 @@ class Replica extends AbstractActor {
     public enum Decision {ABORT, COMMIT}
     public Decision decision = null;
     private final List<ActorRef> yesVoters = new ArrayList<>();
+    private boolean decisionResponseReceived = false;
 
     // Election
     private boolean electionMessageReceived = false;
@@ -371,7 +372,7 @@ class Replica extends AbstractActor {
     }
 
     private void onDecisionResponse(DecisionResponse res) {
-
+    	decisionResponseReceived = true;
         if (res.decision == Decision.COMMIT) {
             this.timeStamp = res.timeStamp;
             this.epoch = timeStamp.getKey();
@@ -421,16 +422,25 @@ class Replica extends AbstractActor {
     }
 
     public void onDecisionTimeout(DecisionTimeout msg) {
+    	if (decisionResponseReceived) {
+    		decisionResponseReceived = false;
+    		return;
+    	}
 
         if (!hasDecided() && !isCoordinator() && !electionStarted) {
             print("timeout on decision response, coordinator crashed");
 
-
+            
             // start election process
             if (!electionStarted) {
                 print("I'm starting the election");
                 electionStarted = true;
+                String b = Boolean.toString(electionStarted);
+                print("Valore election startes: "+b);
                 getSelf().tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+                
+            }else {
+            	return;
             }
         }
     }
@@ -446,15 +456,40 @@ class Replica extends AbstractActor {
 
     public void onHeartbeatTimeout(HeartbeatTimeout msg) {
         if (checkHeartbeat() && electionStarted == false) {
-            print("timeout on decision response, coordinator crashed");
-
+            print("timeout on heartbeat, coordinator crashed");
+            try {
+            	int n = (int)(Math.random()*100);
+				Thread.sleep(n);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 
             // start election process
             if (!electionStarted) {
                 print("I'm starting the election");
                 electionStarted = true;
-                getSelf().tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+                
+                //getSelf().tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+                indexNextReplica = getID();
+          
+                
+                indexNextReplica = (indexNextReplica + 1) % replicas.size();
+                if (indexNextReplica == coordinator){
+                    indexNextReplica = (indexNextReplica + 1) % replicas.size();
+                   
+                }
+             
+                ActorRef nextReplica = replicas.get(indexNextReplica);
+                this.msg = new CoordinatorElectionMessage(id, timeStamp);
+                nextReplica.tell(this.msg, getSelf());
+              
+                electionMessageReceived = true;
+           
             }
+         else {
+            print("election in progress");
+        }
         }
     }
 
@@ -479,7 +514,7 @@ class Replica extends AbstractActor {
                 indexNextReplica = (indexNextReplica + 1) % replicas.size();
             }
         	ActorRef nextReplica = replicas.get(indexNextReplica);
-            nextReplica.tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
+            nextReplica.tell(this.msg, getSelf());
         }
     }
 
@@ -557,6 +592,7 @@ class Replica extends AbstractActor {
                     }
                 }
 
+                getSender().tell(new CoordinatorElectionMessageACK(), getSelf());
                 print("is elected as new coordinator");
 
                 print("replicas indexes without last update: " + indexesOfReplicaWithoutUpdate.toString());
@@ -564,22 +600,36 @@ class Replica extends AbstractActor {
                 sendSync(id, this.v);
                 sendBeat();
                 updateEpoch();
+                
                 return;
             }
         }
 
         // find the index of the next replica whom im supposed to forward
-        if (indexNextReplica == null) {
-            indexNextReplica = getID();
-        }
+       
+        	
+        /*indexNextReplica = getID();
+        print("INDEX NEXT REPLICA null" +indexNextReplica);
+        
         indexNextReplica = (indexNextReplica + 1) % replicas.size();
         if (indexNextReplica == coordinator){
             indexNextReplica = (indexNextReplica + 1) % replicas.size();
-        }
-        ActorRef nextReplica = replicas.get(indexNextReplica);
+            print("INDEX NEXT REPLICA coord" +indexNextReplica);
+        }*/
+        print("INDEX NEXT REPLICA norm" +indexNextReplica);
+        //ActorRef nextReplica = replicas.get(indexNextReplica);
 
         //Update coordinator election message, first cycle
         if (!electionMessageReceived) {
+        	indexNextReplica = getID();
+            print("INDEX NEXT REPLICA null" +indexNextReplica);
+            
+            indexNextReplica = (indexNextReplica + 1) % replicas.size();
+            if (indexNextReplica == coordinator){
+                indexNextReplica = (indexNextReplica + 1) % replicas.size();
+                print("INDEX NEXT REPLICA coord" +indexNextReplica);
+            }
+            ActorRef nextReplica = replicas.get(indexNextReplica);
             msg.idReplica = id;
             msg.lastUpdates.add(new Pair(id, timeStamp));
             mylastUpdates = msg.lastUpdates;
@@ -587,6 +637,7 @@ class Replica extends AbstractActor {
             nextReplica.tell(msg, getSelf());
             electionMessageReceived = true;
         } else {
+        	ActorRef nextReplica = replicas.get(indexNextReplica);
         	msg.idReplica = id; // serve quest?
         	this.msg = msg;     // todo remove?
             nextReplica.tell(msg, getSelf());
@@ -621,7 +672,7 @@ class Replica extends AbstractActor {
 
     private void onSynchronizationMessage(SynchronizationMessage msg) {
         electionMessageReceived = false;
-        electionStarted = false;
+       
 
         print("sets new coordinator as: " + getSender().path().name());
 
@@ -637,6 +688,7 @@ class Replica extends AbstractActor {
         //Replica set the new coordinator and update its epoch
         coordinator = msg.id;
         updateEpoch();
+        electionStarted = false;
         // multicast joingroupmessage ? Nel caso bisogna rogliere il send beat da prima
     }
 
@@ -672,7 +724,8 @@ class Replica extends AbstractActor {
         }
         getContext().become(crashed());
         print("is crashed");
-
+        
+        crashed = true;
         CRASH_ON_UPDATE_SEND = false;
         CRASH_ON_UPDATE_RECEIVED = false;
         CRASH_ON_WRITEOKS_SEND = false;
