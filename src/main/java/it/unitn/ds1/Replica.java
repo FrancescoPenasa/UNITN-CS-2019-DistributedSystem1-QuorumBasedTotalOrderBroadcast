@@ -598,7 +598,7 @@ class Replica extends AbstractActor {
                 print("replicas indexes without last update: " + indexesOfReplicaWithoutUpdate.toString());
 
                 sendSync(id, this.v);
-                sendBeat();
+                sendBeat(); // todo remove send beat if the joingroupmessage has been added
                 updateEpoch();
                 
                 return;
@@ -686,10 +686,13 @@ class Replica extends AbstractActor {
         }
 
         //Replica set the new coordinator and update its epoch
+        setID(0);
         coordinator = msg.id;
+
         updateEpoch();
+        //todo add multicast(new JoinGroupMsg(new_replicas, 0), new_replicas);
+
         electionStarted = false;
-        // multicast joingroupmessage ? Nel caso bisogna rogliere il send beat da prima
     }
 
     void sendSync(int id, int value) {
