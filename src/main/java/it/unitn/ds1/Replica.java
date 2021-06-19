@@ -99,7 +99,9 @@ class Replica extends AbstractActor {
     public CoordinatorElectionMessage msg = null;
     public boolean lastUpdateReceived = true;
     private boolean electionMessageACKReceived = false;
-
+    //public static List<ActorRef> activeReplicas = new LinkedList<ActorRef>();
+    //public static boolean joinMessage = false;
+    public static List crashedReplicas = new LinkedList<ActorRef>();
     //Uniform agreement
     public static List<Integer> indexesOfReplicaWithoutUpdate = new LinkedList<Integer>();
 
@@ -115,6 +117,8 @@ class Replica extends AbstractActor {
     }
     // ==================== //
 
+    
+    
 
     // === Messages handlers === //
 
@@ -225,7 +229,7 @@ class Replica extends AbstractActor {
         } else {
 
             print("receives write req from " + getSender().path().name());
-            print("sends write req to coordinator");
+            print("sends write req to coordinator"+ this.coordinator);
             WriteRequest update = new WriteRequest(req.value);
             replicas.get(coordinator).tell(update, self());
         }
@@ -397,15 +401,16 @@ class Replica extends AbstractActor {
         }
     }
 
+    //ho cambiato qua nel join grpup message
     public void onVoteTimeout(VoteTimeout msg) {
         if (!hasDecided() && isCoordinator()) {
             print("timeout on vote request, replica crashed");
-            List<ActorRef> new_replicas = null;
-            setID(0);                    // set my ID to 0 because im the coordinator
-            new_replicas.add(getSelf()); // position 0 the coordinator position
-            new_replicas.addAll(yesVoters);
-            multicast(new JoinGroupMsg(new_replicas, 0), new_replicas);
-            fixDecision(Decision.ABORT);
+            //List<ActorRef> new_replicas = null;
+            //setID(0);                    // set my ID to 0 because im the coordinator
+            //new_replicas.add(getSelf()); // position 0 the coordinator position
+            //new_replicas.addAll(yesVoters);
+            //multicast(new JoinGroupMsg(new_replicas, id), new_replicas);
+            //fixDecision(Decision.ABORT);
             multicast(new DecisionResponse(Decision.ABORT, 0, this.timeStamp));
             setTimeout(Timeout.DECISION);
         }
@@ -436,7 +441,12 @@ class Replica extends AbstractActor {
                 print("I'm starting the election");
                 electionStarted = true;
                 String b = Boolean.toString(electionStarted);
-                print("Valore election startes: "+b);
+                //print("Valore election startes: "+b);
+               // print("ADDING TO ACTIVE REPLICA" + this.id);
+              //  if (this.id!=2) {
+               // this.activeReplicas.add(getSelf());
+                //}
+                setTimeout(Timeout.ELECTION);
                 getSelf().tell(new CoordinatorElectionMessage(id, timeStamp), getSelf());
                 
             }else {
@@ -481,9 +491,13 @@ class Replica extends AbstractActor {
                 }
              
                 ActorRef nextReplica = replicas.get(indexNextReplica);
+                setTimeout(Timeout.ELECTION);
                 this.msg = new CoordinatorElectionMessage(id, timeStamp);
                 nextReplica.tell(this.msg, getSelf());
-              
+                //print("ADDING TO ACTIVE REPLICA" + this.id);
+                //if (this.id!=2) {
+                  //  this.activeReplicas.add(getSelf());
+                   // }
                 electionMessageReceived = true;
            
             }
@@ -543,6 +557,7 @@ class Replica extends AbstractActor {
         if (DEBUG && CRASH_ON_ELECTION){
             if (getID() == 2){ // todo manage if the biggest one is crashed
                 print("crashed during election: " + getID());
+                //this.crashedReplicas.add(getSelf());
                 crash();
                 return;
             }
@@ -596,7 +611,7 @@ class Replica extends AbstractActor {
                 print("is elected as new coordinator");
 
                 print("replicas indexes without last update: " + indexesOfReplicaWithoutUpdate.toString());
-
+                this.coordinator = this.id;
                 sendSync(id, this.v);
                 sendBeat(); // todo remove send beat if the joingroupmessage has been added
                 updateEpoch();
@@ -616,24 +631,28 @@ class Replica extends AbstractActor {
             indexNextReplica = (indexNextReplica + 1) % replicas.size();
             print("INDEX NEXT REPLICA coord" +indexNextReplica);
         }*/
-        print("INDEX NEXT REPLICA norm" +indexNextReplica);
+        //print("INDEX NEXT REPLICA norm" +indexNextReplica);
         //ActorRef nextReplica = replicas.get(indexNextReplica);
 
         //Update coordinator election message, first cycle
         if (!electionMessageReceived) {
         	indexNextReplica = getID();
-            print("INDEX NEXT REPLICA null" +indexNextReplica);
+            //print("INDEX NEXT REPLICA null" +indexNextReplica);
             
             indexNextReplica = (indexNextReplica + 1) % replicas.size();
             if (indexNextReplica == coordinator){
                 indexNextReplica = (indexNextReplica + 1) % replicas.size();
-                print("INDEX NEXT REPLICA coord" +indexNextReplica);
+                //print("INDEX NEXT REPLICA coord" +indexNextReplica);
             }
             ActorRef nextReplica = replicas.get(indexNextReplica);
             msg.idReplica = id;
             msg.lastUpdates.add(new Pair(id, timeStamp));
             mylastUpdates = msg.lastUpdates;
             this.msg = msg;
+            //print("ADDING TO ACTIVE REPLICA" + this.id);
+         //   if (this.id!=2) {
+           //     this.activeReplicas.add(getSelf());
+             //   }
             nextReplica.tell(msg, getSelf());
             electionMessageReceived = true;
         } else {
@@ -673,7 +692,11 @@ class Replica extends AbstractActor {
     private void onSynchronizationMessage(SynchronizationMessage msg) {
         electionMessageReceived = false;
        
-
+     //   print("QUESTE SONO LE ACTIVE REPLICAS");
+     //   for(ActorRef rep : this.activeReplicas) {
+      //  	print("ATTIVA"+ rep.toString());
+      //  }
+        
         print("sets new coordinator as: " + getSender().path().name());
 
         //Replica checks if it is inside the list. If true it updates its value
@@ -686,12 +709,15 @@ class Replica extends AbstractActor {
         }
 
         //Replica set the new coordinator and update its epoch
-        setID(0);
-        coordinator = msg.id;
-
+        //setID(0);
+        this.coordinator = msg.id;
+        print("this coordinator"+this.coordinator);
         updateEpoch();
-        //todo add multicast(new JoinGroupMsg(new_replicas, 0), new_replicas);
-
+        
+    //    if (joinMessage == false){
+      //  	multicast(new JoinGroupMsg(this.activeReplicas, msg.id), this.activeReplicas);
+        	//joinMessage = true;
+       // }
         electionStarted = false;
     }
 
@@ -720,6 +746,7 @@ class Replica extends AbstractActor {
     }
 
     public void crash() {
+    	this.crashedReplicas.add(getSelf());
         if (isCoordinator()) {
             for(Cancellable t : heartbeatTimers) {
                 t.cancel();
@@ -843,7 +870,7 @@ class Replica extends AbstractActor {
 
     boolean quorumReachedYes() {
         print("checks quorum");
-        return yesVoters.size() >= (replicas.size() / 2) + 1;
+        return yesVoters.size() >= ((replicas.size()-this.crashedReplicas.size()) / 2) + 1;
     }
 
     boolean ackReceived() {
