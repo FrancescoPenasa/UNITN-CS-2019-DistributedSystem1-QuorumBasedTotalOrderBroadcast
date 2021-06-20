@@ -74,7 +74,7 @@ public class Client extends AbstractActor{
 	Method to send a write request for the value @v to replica @ID
 	 */
 	private Serializable sendWriteReq(int ID, int v){
-		print("write req to " + ID);
+		logger.info("Client "+this.id+" : write req to " + ID);
 		WriteRequest wr = new WriteRequest(v);
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(DELAY, TimeUnit.MILLISECONDS),
@@ -90,7 +90,7 @@ public class Client extends AbstractActor{
 	Method to send a read request to replica @ID
 	 */
 	private Serializable sendReadReq(int ID){
-		print("read req to " + ID);
+		logger.info("Client "+this.id+" : read req to " + ID);
 		ReadRequest rr = new ReadRequest();
 		getContext().system().scheduler().scheduleOnce(
 				Duration.create(DELAY, TimeUnit.MILLISECONDS),
@@ -112,7 +112,7 @@ public class Client extends AbstractActor{
 		}
 	}
 	private void onReadResponse(ReadResponse rr){
-		print("read done " + rr.v);
+		logger.info("Client "+this.id+" : read done " + rr.v);
 	}
 
 	/*
@@ -160,7 +160,4 @@ public class Client extends AbstractActor{
 				.build();
 	}
 
-	void print(String s) {
-		logger.info("Client "+this.id+": "+ s);
-	}
 }
